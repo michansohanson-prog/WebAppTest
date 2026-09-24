@@ -1,7 +1,3 @@
-Here is your updated `WebAppTest.md` file. I have reorganized it to include the **Completed Tasks** so you can see how far we've already come, and kept the remaining Phase 1 tasks as our immediate roadmap.
-
----
-
 # Project Overview: [Your App Name]
 
 ## 🎯 Core Goals
@@ -9,6 +5,7 @@ Here is your updated `WebAppTest.md` file. I have reorganized it to include the 
 - **User Base:** A private web application for exactly **6 users**.
 - **Cost Constraint:** Must be **100% free** (both development and ongoing usage) by leveraging free tiers of modern services.
 - **Core Experience:** A multi-game platform featuring interactive minigames, a persistent "World State," and social features.
+- **Mobile-First Design:** The application must be primarily designed for mobile devices, ensuring seamless navigation and interaction on phones before expanding to desktop screens.
 
 ## 🛠 Functional Requirements
 
@@ -22,16 +19,17 @@ Here is your updated `WebAppTest.md` file. I have reorganized it to include the 
   - Camera integration for QR code scanning.
   - Video playback of short clips hosted in the cloud.
 - **Mini-Games:** Multiple distinct interactive games within a single unified web app.
+- **Responsive UI/UX:** Touch-friendly interactions (large buttons, swipe gestures) and an adaptive layout that adjusts perfectly to various mobile screen sizes.
 
 ## 💻 Technical Stack
 
-| Component                | Technology              | Role                                                             |
-| :----------------------- | :---------------------- | :--------------------------------------------------------------- |
-| **Build Tool**           | Vite                    | Fast development server and bundling.                            |
-| **Frontend Framework**   | Vue 3 (Composition API) | UI components and reactive logic.                                |
-| **Styling**              | Vanilla CSS             | Traditional, clean styling without framework overhead.           |
-| **State Management**     | Pinia                   | Handling global "World State" across the app.                    |
-| **Backend-as-a-Service** | Supabase                | Handles Auth, Database (PostgreSQL), Realtime Sync, and Storage. |
+| Component                | Technology              | Role                                                                                         |
+| :----------------------- | :---------------------- | :------------------------------------------------------------------------------------------- |
+| **Build Tool**           | Vite                    | Fast development server and bundling.                                                        |
+| **Frontend Framework**   | Vue 3 (Composition API) | UI components and reactive logic.                                                            | \   |
+| **Styling**              | Vanilla CSS             | Traditional, clean styling with a focus on responsive design and mobile-first media queries. | \   |
+| **State Management**     | Pinia                   | Handling global "World State" across the app.                                                | \   |
+| **Backend-as-a-Service** | Supabase                | Handles Auth, Database (PostgreSQL), Realtime Sync, and Storage.                             | \   |
 
 ## 🚀 Development Strategy
 
@@ -49,7 +47,7 @@ _Goal: A fully navigable web app that works perfectly using "fake" data._
 **⏳ Remaining Tasks:**
 
 1.  **Navigation & Routing:** Connect the new views to the router so we can move between pages.
-2.  **Global Styling (Vanilla CSS):** Define colors and typography in `variables.css` and establish a layout system.
+2.  **Global Styling (Vanilla CSS):** Define colors and typography in `variables.css` and establish a responsive layout system using mobile-first principles.
 3.  **World State Logic:** Create the Pinia store that reads from `src/mocks/worldState.ts`.
 4.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
 5.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
