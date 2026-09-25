@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router' // Changed to WebHashHistory
 
 const routes = [
   {
@@ -49,18 +49,17 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  // Changed from createWebHistory() to createWebHashHistory()
+  history: createWebHashHistory(),
   routes,
 })
 
-// Modern Navigation Guard (No warnings)
+// Navigation Guard (No warnings)
 router.beforeEach((to, from) => {
   if (to.path === '/' && to.matched.length === 0) {
-    return '/login' // Returning the path is the modern way to redirect
+    return '/login'
   }
 
-  // Catch-all: if a user types a random URL that doesn't exist,
-  // send them back to login.
   if (to.matched.length === 0) {
     return '/login'
   }
