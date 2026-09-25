@@ -1,0 +1,202 @@
+@import './variables.css';
+
+/* Global Reset & Foundation */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  line-height: 1.7;
+  overflow-x: hidden;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* --- Typography System (Enhanced with Glows) --- */
+
+h1,
+h2,
+h3 {
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  font-weight: 900;
+}
+
+h1 {
+  font-size: clamp(2rem, 8vw, 4rem);
+}
+
+/* Global text brightness & subtle glow for all content */
+p,
+.subtitle,
+span {
+  color: var(--text-secondary);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Utility Classes for Glow Effects */
+.glow-blue {
+  text-shadow: var(--glow-blue);
+  color: #fff;
+}
+.glow-green {
+  text-shadow: var(--glow-green);
+  color: #fff;
+}
+.glow-purple {
+  text-shadow: var--glow-purple;
+  color: #fff;
+}
+
+/* Data / Terminal Layer */
+.data-field,
+.status-pulse,
+code,
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--neon-green);
+}
+
+/* --- Component Archetypes --- */
+
+.card-void,
+.card-dark-steel,
+.card-iridescent {
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition-main);
+  border: 1px solid transparent;
+}
+
+/* Type A: Murky Void */
+.card-void {
+  background: var(--gradient-murky);
+  border-color: var(--border-color);
+}
+
+.card-void:active {
+  transform: var(--active-scale);
+  border-color: var(--neon-blue);
+}
+
+/* Type B: Dark Steel (Multi-variant support via classes) */
+.card-dark-steel {
+  background: var(--gradient-dark-steel);
+  border-color: #3d4652;
+}
+
+/* Color Options for Hardware_Unit Card */
+.hw-green {
+  border-color: var(--neon-green);
+}
+.hw-blue {
+  border-color: var(--neon-blue);
+}
+.hw-purple {
+  border-color: var(--ghost-purple);
+}
+
+.card-dark-steel:active {
+  transform: var(--active-scale);
+  border-color: var(--neon-green); /* Default active color */
+}
+
+/* Type C: Iridescent */
+.card-iridescent {
+  background: var(--gradient-iridescent);
+  border-color: var(--ghost-purple);
+}
+
+.card-iridescent:active {
+  transform: var--active-scale;
+  border-color: #fff;
+}
+
+/* --- Buttons (Mobile optimized) --- */
+.btn-cyber {
+  padding: 0.8rem 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: var(--transition-main);
+  display: inline-block;
+}
+
+.btn-primary {
+  background: var(--gradient-iridescent);
+  color: #fff;
+}
+.btn-secondary {
+  background: var(--metal-gunmetal);
+  border: 1px solid var(--metal-steel);
+  color: var(--metal-steel);
+}
+
+.btn-cyber:active {
+  transform: var(--active-scale);
+}
+
+/* Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+@keyframes neonPulse {
+  0% {
+    filter: drop-shadow(0 0 5px var(--neon-blue));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px var(--neon-blue));
+  }
+  100% {
+    filter: drop-shadow(0 0 5px var(--neon-blue));
+  }
+}
+
+.pulse-active {
+  animation: neonPulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse-opacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.status-pulse {
+  color: var(--neon-green);
+  animation: pulse-opacity 2s infinite;
+}

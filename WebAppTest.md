@@ -46,11 +46,18 @@ _Goal: A fully navigable web app that works perfectly using "fake" data._
 
 **⏳ Remaining Tasks:**
 
-1.  **Navigation & Routing:** Connect the new views to the router so we can move between pages.
-2.  **Global Styling (Vanilla CSS):** Define colors and typography in `variables.css` and establish a responsive layout system using mobile-first principles.
-3.  **World State Logic:** Create the Pinia store that reads from `src/mocks/worldState.ts`.
-4.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
-5.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
+1.  **Design System Foundation:**
+    - Define cyberpunk theme in `variables.css` (Neon colors, Cyber gradients).
+    - Establish base responsive layouts and global typography in `main.css`.
+2.  **UI Component Library:**
+    - Create "Smart" components in `src/components` (e.g., `CyberButton.vue`, `CyberCard.vue`).
+    - Ensure all core UI elements follow the cyberpunk aesthetic consistently.
+3.  **Design Sandbox Testing:**
+    - Use `App.vue` as a sandbox to verify layout, glow effects, and component behavior before integrating into full pages.
+4.  **Navigation & Routing:** Connect the new views to the router so we can move between pages.
+5.  **World State Logic:** Create the Pinia store that reads from `src/mocks/worldState.ts`.
+6.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
+7.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
 
 ### Phase 2: Authentication & Storage
 
@@ -75,4 +82,4 @@ _Goal: Instant synchronization across all 6 users._
 
 ### 🚦 Current Status
 
-**Next Action Item:** Step 1 of Phase 1 — **Navigation & Routing**.
+**Next Action Item:** Step 1 of Phase 1 — **Design System Foundation** (`variables.css` & `main.css`).
