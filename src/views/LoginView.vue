@@ -1,23 +1,12 @@
 <template>
   <div class="login-container">
-    <!-- DEBUG HEADER: If you don't see this red text, the component isn't mounting -->
-    <h1
-      style="
-        color: red;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        text-align: center;
-        z-index: 9999;
-        background: black;
-      "
-    >
-      DEBUG: LOGIN VIEW MOUNTED
-    </h1>
-
     <div class="auth-card cyber-card">
       <header class="auth-header">
-        <h1 class="glow-text flicker-text">SYSTEM_ACCESS</h1>
+        <!-- New multi-row layout to prevent word splitting -->
+        <h1 class="glow-text flicker-text">
+          <span>SYSTEM DISPLAY</span><br />
+          <span>ACCESS</span>
+        </h1>
         <p class="subtitle glow-cyan">NEURAL LINK GATEWAY</p>
       </header>
 
@@ -57,7 +46,6 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: #020308; /* Hardcoded fallback */
   background: var(--bg-void);
 }
 
@@ -76,6 +64,17 @@
 .auth-header {
   text-align: center;
   margin-bottom: 40px;
+}
+
+/* Heading Styling - Optimized for the two lines */
+.glow-text {
+  font-size: clamp(1.2rem, 6vw, 3rem); /* Scaled to fit mobile and desktop */
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.glow-text span {
+  display: block; /* Ensures every word is on its own line as requested */
 }
 
 .form-group {
