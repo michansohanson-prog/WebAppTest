@@ -1,10 +1,11 @@
-import { createRouter, createWebHashHistory } from 'vue-router' // Changed to WebHashHistory
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../views/LoginView.vue'),
+    // Redirect the root to login automatically if it hits the base path
+    redirect: '/login',
   },
   {
     path: '/login',
@@ -49,20 +50,12 @@ const routes = [
 ]
 
 const router = createRouter({
-  // Changed from createWebHistory() to createWebHashHistory()
   history: createWebHashHistory(),
   routes,
 })
 
-// Navigation Guard (No warnings)
-router.beforeEach((to, from) => {
-  if (to.path === '/' && to.matched.length === 0) {
-    return '/login'
-  }
-
-  if (to.matched.length === 0) {
-    return '/login'
-  }
-})
+// Remove the manual before_each guards for a moment to see if they are causing conflicts
+// with the Hash history mode. The 'redirect' above handles the root path correctly.
+router.addRoute('Login_Route', '/') // Ensure login is always reachable
 
 export default router
