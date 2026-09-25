@@ -7,20 +7,22 @@
     </header>
 
     <main class="inventory-container">
-      <!-- FILTER BAR -->
+      <!-- FILTER BAR - UPDATED TO SCROLLABLE TAB SYSTEM -->
       <nav class="filter-bar cyber-card">
-        <button @click="currentFilter = 'all'" :class="{ active: currentFilter === 'all' }">
-          ALL_ASSETS
-        </button>
-        <button @click="currentFilter = 'gear'" :class="{ active: currentFilter === 'gear' }">
-          EQUIPMENT
-        </button>
-        <button @click="currentFilter = 'data'" :class="{ active: currentFilter === 'data' }">
-          DATA_FRAGMENTS
-        </button>
-        <button @click="currentFilter = 'bio'" :class="{ active: currentFilter === 'bio' }">
-          SYNTHETICS
-        </button>
+        <div class="scroll-container">
+          <button @click="currentFilter = 'all'" :class="{ active: currentFilter === 'all' }">
+            ALL_ASSETS
+          </button>
+          <button @click="currentFilter = 'gear'" :class="{ active: currentFilter === 'gear' }">
+            EQUIPMENT
+          </button>
+          <button @click="currentFilter = 'data'" :class="{ active: currentFilter === 'data' }">
+            DATA_FRAGMENTS
+          </button>
+          <button @click="currentFilter = 'bio'" :class="{ active: currentFilter === 'bio' }">
+            SYNTHETICS
+          </button>
+        </div>
       </nav>
 
       <!-- INVENTORY GRID -->
@@ -72,7 +74,7 @@ const items = ref([
   },
   {
     id: 2,
-    name: 'BIO_STIM_PACK',
+    name: 'BIO STIM PACK',
     type: 'data',
     source: 'RECRE_ZONE',
     status: 'AVAILABLE',
@@ -121,7 +123,8 @@ const filteredItems = computed(() => {
 <style scoped>
 .inventory-view {
   min-height: 100vh;
-  padding: 40px 20px;
+  /* Increased side padding to ensure the main container never touches screen edges */
+  padding: 40px 30px;
   background: var(--bg-void);
   display: flex;
   flex-direction: column;
@@ -131,44 +134,64 @@ const filteredItems = computed(() => {
 .header-area {
   text-align: center;
   margin-bottom: 40px;
+  width: 100%;
 }
 
+/* Ensure the container never exceeds safe screen width */
 .inventory-container {
   width: 100%;
   max-width: 900px;
+  margin: 0 auto;
 }
 
-/* Filter Bar Styling */
+/* FILTER BAR - FIXED FOR MOBILE SCROLLING */
 .filter-bar {
   display: flex;
   justify-content: center;
-  gap: 15px;
   margin-bottom: 40px;
-  padding: 15px;
+  padding: 12px;
   border: 1px solid var(--border-glow);
+  background: rgba(10, 10, 15, 0.8);
+}
+
+/* This container makes the buttons scrollable horizontally on small screens */
+.scroll-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 5px;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll-container::-webkit-scrollbar {
+  display: none;
 }
 
 .filter-bar button {
   background: transparent;
   border: 1px solid var(--border-glow);
   color: var(--text-mint);
-  padding: 8px 15px;
-  font-size: 0.7rem;
+  padding: 8px 20px; /* More horizontal padding for better tap targets */
+  font-size: 0.75rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .filter-bar button.active {
-  background: var(--glow-cyan);
-  color: black;
-  border-color: var(--glow-cyan);
+  background: var(--neon-blue);
+  color: #000 !important; /* Force high contrast */
+  border-color: var(--neon-blue);
 }
 
-/* Grid Layout */
+/* Grid Layout - Adjusted for safer sizing */
 .grid-vault {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 20px;
+  width: 100%;
 }
 
 .asset-card {
@@ -186,7 +209,7 @@ const filteredItems = computed(() => {
 }
 
 .asset-icon {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 15px;
   text-align: center;
 }
@@ -194,7 +217,7 @@ const filteredItems = computed(() => {
 .asset-info h3 {
   color: var(--text-mint);
   margin: 0 0 8px 0;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 4vw, 1.2rem);
   letter-spacing: 1px;
 }
 
@@ -221,17 +244,15 @@ const filteredItems = computed(() => {
   color: var(--text-mint);
 }
 
-/* Reusing established cyber-input style if needed */
-.cyber-input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glow);
-  padding: 12px;
-  color: var(--text-mint);
-}
-
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+  /* Extra small screen adjustments */
   .grid-vault {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
+
+  .inventory-view {
+    padding: 30px 20px; /* Tighten padding slightly for very narrow screens */
   }
 }
 </style>

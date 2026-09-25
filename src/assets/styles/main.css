@@ -1,3 +1,5 @@
+/* src/assets/styles/main.css */
+
 @import './variables.css';
 
 /* Base Reset & Layout */
@@ -12,7 +14,7 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-mint);
-  font-family: var(--font-main);
+  font-family: var(--font-main, sans-serif);
   line-height: 1.7;
   overflow-x: hidden;
   background-image:
@@ -32,7 +34,7 @@ p {
 
 .subtitle {
   letter-spacing: 2px;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono, monospace);
   color: #a0e9bc;
 }
 
@@ -50,8 +52,8 @@ p {
 }
 .glow-green {
   text-shadow:
-    0 0 8px rgba(0, 255, 0, 0.8),
-    0 0 15px rgba(0, 255, 0, 0.4);
+    0 0 8px rgba(57, 255, 20, 0.8),
+    0 0 15px rgba(57, 255, 20, 0.4);
   color: #fff;
 }
 .glow-purple {
@@ -73,12 +75,31 @@ p {
   color: #fff;
 }
 
+/* Fluid Typography System - ADJUSTED FOR MOBILE */
 h1,
 h2,
 h3 {
   text-transform: uppercase;
   letter-spacing: 4px;
   font-weight: 900;
+  line-height: 1.1;
+  word-wrap: break-word;
+  overflow-wrap: anywhere; /* Prevents words from hanging out of containers */
+}
+
+h1 {
+  /* Lowered minimum to 1.5rem for smaller phones */
+  font-size: clamp(1.5rem, 8vw, 8rem);
+}
+
+h2 {
+  /* Lowered minimum to 1.2rem */
+  font-size: clamp(1.2rem, 6vw, 4rem);
+}
+
+h3 {
+  /* Lowered minimum to 1rem to prevent clipping on narrow screens */
+  font-size: clamp(1rem, 4vw, 2.5rem);
 }
 
 /* App Tile Base Styling */
@@ -110,15 +131,17 @@ h3 {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 2px;
+  /* Forcing a smaller default for mobile grid */
+  font-size: clamp(0.8rem, 3vw, 1.5rem);
 }
 
 .tile-sublabel {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono, monospace);
   font-size: 0.7rem;
   margin-top: 8px;
 }
 
-/* Unique Color Variations */
+/* Unique Color Variations (Keeping these the same) */
 .tile-messenger {
   background: linear-gradient(135deg, rgba(45, 0, 75, 0.6), rgba(20, 0, 40, 0.9));
   border: 3px solid #8a2be2;
@@ -126,7 +149,6 @@ h3 {
 .tile-messenger .tile-label {
   color: #d8b4fe;
 }
-
 .tile-email {
   background: linear-gradient(45deg, rgba(0, 30, 10, 0.7), rgba(0, 0, 0, 0.9));
   border: 2px solid var(--neon-green);
@@ -134,7 +156,6 @@ h3 {
 .tile-email .tile-label {
   color: #4ade80;
 }
-
 .tile-games {
   background: linear-gradient(135deg, rgba(60, 30, 0, 0.7), rgba(20, 0, 0, 0.9));
   border: 2px dashed #f59e0b;
@@ -142,7 +163,6 @@ h3 {
 .tile-games .tile-label {
   color: #fbbf24;
 }
-
 .tile-pets {
   background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, transparent 70%);
   border: 1px solid #0ff;
@@ -150,7 +170,6 @@ h3 {
 .tile-pets .tile-label {
   color: #0ff;
 }
-
 .tile-inventory {
   background: #1a1a1a;
   border: 4px double var(--metal-steel);
@@ -159,7 +178,6 @@ h3 {
   color: #fff;
   text-shadow: 0 0 5px #fff;
 }
-
 .tile-database {
   background: rgba(60, 0, 0, 0.4);
   border: 1px solid #ff0000;
@@ -175,6 +193,7 @@ h3 {
   margin: 0 auto;
   padding: 0 1rem;
 }
+
 .app-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Mobile first */
@@ -193,15 +212,17 @@ h3 {
   margin-bottom: 4rem;
   padding-top: 3rem;
 }
+
 .hub-header h1 {
-  font-size: clamp(3rem, 15vw, 8rem);
+  font-size: clamp(2.5rem, 15vw, 8rem); /* Sized for mobile header */
   letter-spacing: -2px;
   filter: drop-shadow(0 0 15px var(--glow-green));
 }
+
 .hub-footer {
   margin-top: 6rem;
   text-align: center;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono, monospace);
   color: var(--text-secondary);
   padding-bottom: 2rem;
 }
@@ -224,6 +245,7 @@ h3 {
     opacity: 1;
   }
 }
+
 .flicker-text {
   animation: flicker 3s infinite;
 }

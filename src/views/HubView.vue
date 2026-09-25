@@ -54,11 +54,7 @@
 </script>
 
 <style scoped>
-/*
-   The layout uses the established design system.
-   We keep the styling identical to ensure no visual regression occurs
-   now that we are switching from button clicks to router links.
-*/
+/* Keep the layout logic same */
 .hub-layout {
   min-height: 100vh;
   display: flex;
@@ -80,31 +76,40 @@
 
 .app-grid {
   display: grid;
+  /* Standard mobile-first grid */
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  gap: 15px; /* Reduced gap slightly to save space */
 }
 
 @media (min-width: 768px) {
   .app-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
   }
 }
 
-/* Reusing established design system classes */
+/* THE FIX FOR MOBILE OVERFLOW */
 .app-tile {
   aspect-ratio: 1 / 1;
   border: 1px solid var(--border-glow);
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(5px);
   border-radius: 8px;
-  padding: 20px;
+  /* Reduced padding for mobile to give the text more room */
+  padding: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-decoration: none; /* Important for router-link styling */
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .app-tile {
+    padding: 20px; /* Restore larger padding for desktop */
+  }
 }
 
 .app-tile:hover {
@@ -113,18 +118,26 @@
   transform: translateY(-4px);
 }
 
+/* Specific Label Sizing */
 .tile-label {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: clamp(1rem, 3vw, 1.2rem); /* Very small base for mobile grids */
+  font-weight: 900;
+  margin-bottom: 8px;
+  text-align: center;
+  line-height: 1.2;
+  /* Ensures text doesn't bleed out of the square tile */
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .tile-sublabel {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   opacity: 0.6;
   text-transform: uppercase;
+  line-height: 1.2;
 }
 
+/* Keep branding and footer logic same */
 .hub-footer {
   margin-top: 50px;
   padding-bottom: 20px;
