@@ -6,13 +6,15 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueDevTools(),
-  ],
+  plugins: [vue(), vueDevTools()],
+  base: '/WebAppTest/', // <--- ADD THIS LINE (Replace with your actual repo name, e.g., /WebAppTest/)
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+  },
+  server: {
+    host: true,
+    port: 5173,
   },
 })
