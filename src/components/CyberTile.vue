@@ -1,13 +1,14 @@
 <template>
   <!--
-    The class "app-tile" handles base padding, flex centering, transitions,
-    and hover effects. The dynamic "tile-" class handles specific borders and gradients.
+    The base class .app-tile handles the core flex behavior,
+    padding, and hover effects defined in your main.css.
   -->
-  <div :class="['app-tile', `tile-${type}`]" :style="containerStyle">
-    <!-- Automatic Dark Overlay (applied via background-image multi-layer if bgImage exists) -->
-
-    <!-- Primary Label with dynamic glow based on the tile type -->
-    <h2 :class="['glow-' + glowColor, 'tile-label']">
+  <div
+    :class="['app-tile', `variant-${variant}`, layout === 'left' ? 'layout-left' : 'layout-center']"
+    :style="containerStyle"
+  >
+    <!-- Primary Label with dynamic color glow -->
+    <h2 :class="['glow-' + variant, 'tile-label']">
       {{ title }}
     </h2>
 
@@ -30,39 +31,22 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  // types: 'messenger', 'email', 'games', 'pets', 'inventory', 'database'
-  type: {
+  // Variants map to your brand colors
+  variant: {
     type: String,
-    default: 'messenger',
-    required: true,
+    default: 'cyan',
+    validator: (v) => ['cyan', 'green', 'purple', 'red', 'amber'].includes(v),
   },
   bgImage: {
     type: String,
     default: '',
   },
-})
-
-/**
- * Maps the tile type to its respective glow color and specific styling
- * to ensure consistency with your main.css definitions.
- */
-const glowColor = computed(() => {
-  switch (props.type) {
-    case 'messenger':
-      return 'cyan' // Matches label #d8b4fe style
-    case 'email':
-      return 'green' // Matches label #4ade80 style
-    case 'games':
-      return 'amber' // Matches label #fbbf24 style
-    case 'pets':
-      return 'cyan' // Matches label #0ff style
-    case 'inventory':
-      return 'purple' // Matches label #fff style
-    case 'database':
-      return 'red' // Matches label #f87171 style
-    default:
-      return 'cyan'
-  }
+  // Layout options: 'center' or 'left'
+  layout: {
+    type: String,
+    default: 'center',
+    validator: (v) => ['center', 'left'].includes(v),
+  },
 })
 
 /**
@@ -85,18 +69,56 @@ const containerStyle = computed(() => {
 </script>
 
 <style scoped>
-/*
-   Note: .app-tile and .tile-xxx classes are imported from your main.css.
-   We use scoped styles only for component-specific overrides if needed.
-*/
+/* Inherit .app-tile properties from main.css */
 .app-tile {
   height: 100%;
-  min-height: 200px; /* Ensures visibility even without content */
+  min-height: 200px; /* Mobile-friendly touch height */
 }
 
-/* Ensure the tile label doesn't overflow small containers */
-.tile-label {
-  word-wrap: break-word;
-  overflow-wrap: anywhere;
+/* Text Layout Options using spacing variables */
+.layout-center {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.layout-left {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  padding-left: var(--space-md); /* Use standard spacing */
+}
+
+/* Color Variant Styling - Integrated with variables.css */
+/* We use linear gradients that transition from a deep dark base to your brand color */
+
+.variant-cyan {
+  background: linear-gradient(135deg, #0a0e14 0%, var(--color-blue) 100%);
+  border: 2px solid var(--color-blue);
+}
+
+.variant-green {
+  background: linear-gradient(135deg, #0a1208 0%, var(--color-green) 100%);
+  border: 2px solid var(--color-green);
+}
+
+.variant-purple {
+  background: linear-gradient(135deg, #0d081a 0%, var(--color-purple) 100%);
+  border: 2px solid var(--color-purple);
+}
+
+.variant-red {
+  background: linear-gradient(135deg, #1a0808 0%, var(--color-red) 100%);
+  border: 2px solid var(--color-red);
+}
+
+.variant-amber {
+  background: linear-gradient(135deg, #1c1405 0%, var(--color-amber) 100%);
+  border: 2px solid var(--color-amber);
+}
+
+/* Sublabel Styling */
+.tile-sublabel {
+  margin-top: var(--space-sm); /* Use standard spacing variable */
 }
 </style>

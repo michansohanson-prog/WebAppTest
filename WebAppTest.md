@@ -23,13 +23,13 @@
 
 ## 💻 Technical Stack
 
-| Component                | Technology              | Role                                                                                         |
-| :----------------------- | :---------------------- | :------------------------------------------------------------------------------------------- |
-| **Build Tool**           | Vite                    | Fast development server and bundling.                                                        |
-| **Frontend Framework**   | Vue 3 (Composition API) | UI components and reactive logic.                                                            |
-| **Styling**              | Vanilla CSS             | Traditional, clean styling with a focus on responsive design and mobile-first media queries. |
-| **State Management**     | Pinia                   | Handling global "World State" across the app.                                                |
-| **Backend-as-a-Service** | Supabase                | Handles Auth, Database (PostgreSQL), Realtime Sync, and Storage.                             |
+| Component                | Technology              | Role                                                                                |
+| :----------------------- | :---------------------- | :---------------------------------------------------------------------------------- |
+| **Build Tool**           | Vite                    | Fast development server and bundling.                                               |
+| **Frontend Framework**   | Vue 3 (Composition API) | UI components and reactive logic.                                                   |
+| **Styling**              | Vanilla CSS             | Clean, variable-driven styling focusing on mobile-first performance and modularity. |
+| **State Management**     | Pinia                   | Handling global "World State" across the app.                                       |
+| **Backend-as-a-Service** | Supabase                | Handles Auth, Database (PostgreSQL), Realtime Sync, and Storage.                    |
 
 ## 🚀 Development Strategy
 
@@ -41,22 +41,21 @@ _Goal: A fully navigable web app that works perfectly using "fake" data._
 
 - [x] Project Initialization (Vite + Vue + Pinia + Router)
 - [x] Folder Structure Scaffolding (`views`, `components`, `games`, `features`, `mocks`)
-- [x] **Design System Foundation:** Established "Iridescent Void" theme in `variables.css` and archetypes in `main.css`.
+- [x] **Design System Foundation:** Established a comprehensive variable system in `variables.css` for colors, spacing, fluid typography, and glow effects.
+- [x] **Refactored Core Styling:** Streamlined `main.css` to act as a global foundation (Reset, Typography, Branding) rather than containing component logic.
 - [x] **Login System Implementation:** Built a functional authentication flow with dummy credentials, loading states, and navigation logic.
-- [x] **Global Shell & Navigation:** Created an `App.vue` shell that hosts all views and includes a persistent, scrollable bottom navigation bar for core sections (Hub, Comm, Messages, Games, Familiars, Inventory, Archives).
+- [x] **Global Shell & Navigation:** Created an `App.vue` shell that hosts all views and includes a persistent bottom navigation bar for core sections (Hub, Comm, Messages, Games, Familiers, Inventory, Archives).
 - [x] **Core View Layouts:** Established the UI foundations for Login, Hub, and Inventory pages with mobile-optimized typography and responsive grids.
 - [x] **Deployment & Routing:** Successfully deployed to GitHub Pages; implemented Hash Routing to ensure persistent navigation across refreshed pages.
+- [x] **Smart Component Library:**
+  - Created `CyberButton.vue`: A robust component supporting sizes (`sm`, `md`, `lg`), color variants with neon gradients, loading states, sound effects, and on/off toggle functionality.
+  - Created `CyberTile.vue`: A flexible navigation card handling dynamic backgrounds, dark overlays, multiple text layouts, and color variants.
 
 **⏳ Remaining Tasks:**
 
-**⏳ Remaining Tasks:**
-
-1.  **UI Component Library (Smart Components):**
-    - Create `CyberButton.vue`: A prop-driven button supporting sizes (`sm`, `md`, `lg`), variants, loading states, and a slot system for mixed content (Icons + Text). Integrate an optional `sound` prop.
-    - Create `CyberTile.vue`: A hub navigation component that handles dynamic background images, automatic dark overlays, and primary/secondary labels.
+1.  **Design Sandbox Testing (Current):** Use a dedicated gallery in `App.vue` to verify layout consistency, glow intensities, and responsive wrapping for all components before final integration into specific pages.
+2.  **Component Expansion:**
     - Create `InventoryItem.vue`: A horizontal list-item component designed for selection. Features a long rectangular "box" layout to hold text descriptions, support for toggleable highlight states (selection on click), and slot support for item icons or quantities.
-2.  **Design Sandbox Testing:** Use `App.vue` as a sandbox to verify layout, glow effects, and component behavior before integrating into full pages.
-    - Build Composite Components for specific pages.
 3.  **World State Logic (Engine Setup):** Create the Pinia store that reads from `src/mocks/worldState.js`. This must be structured as a **Progress Engine** to handle milestone flags and unlocks.
 4.  **AudioManager Implementation:** Build a centralized Audio Manager service to manage global volume, mute toggles, asset preloading, and concurrency for all sound triggers.
 5.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
@@ -93,4 +92,4 @@ _Goal: Instant synchronization across all 6 users._
 
 ### 🚦 Current Status
 
-**Next Action Item:** UI Component Library - Create "Smart" components in `src/components` and begin testing layouts in the Design Sandbox.
+**Next Action Item:** Complete Design Sandbox Testing to finalize component aesthetics before integrating into functional view pages.

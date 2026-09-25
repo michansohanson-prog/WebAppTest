@@ -2,7 +2,7 @@
 
 @import './variables.css';
 
-/* Base Reset & Layout */
+/* --- 1. Base Reset & Global Style Defaults --- */
 *,
 *::before,
 *::after {
@@ -12,11 +12,12 @@
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-mint);
+  background-color: var(--color-bg-void);
+  color: var(--text-primary);
   font-family: var(--font-main, sans-serif);
-  line-height: 1.7;
+  line-height: var(--lh-base);
   overflow-x: hidden;
+  /* Core Branding Background */
   background-image:
     radial-gradient(circle at 50% 50%, rgba(20, 20, 40, 0.8) 0%, transparent 100%),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
@@ -28,176 +29,67 @@ body {
 }
 
 p {
-  color: var(--subtext-mint);
-  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
 }
 
-.subtitle {
-  letter-spacing: 2px;
-  font-family: var(--font-mono, monospace);
-  color: #a0e9bc;
-}
-
-.tile-sublabel {
-  opacity: 0.85;
-  color: var(--subtext-mint);
-}
-
-/* Global Glow Utilities */
+/* --- 2. Global Glow Utilities (Used by Components) --- */
+/* These provide the shared text-shadow behavior for all neon elements */
 .glow-cyan {
-  text-shadow:
-    0 0 8px rgba(0, 255, 255, 0.8),
-    0 0 15px rgba(0, 255, 255, 0.4);
+  text-shadow: var(--glow-blue);
   color: #fff;
 }
 .glow-green {
-  text-shadow:
-    0 0 8px rgba(57, 255, 20, 0.8),
-    0 0 15px rgba(57, 255, 20, 0.4);
+  text-shadow: var(--glow-green);
   color: #fff;
 }
 .glow-purple {
-  text-shadow:
-    0 0 8px rgba(191, 0, 255, 0.8),
-    0 0 15px rgba(191, 0, 255, 0.4);
+  text-shadow: var(--glow-purple);
   color: #fff;
 }
 .glow-red {
-  text-shadow:
-    0 0 8px rgba(255, 0, 0, 0.8),
-    0 0 15px rgba(255, 0, 0, 0.4);
+  text-shadow: var(--glow-red);
   color: #fff;
 }
 .glow-amber {
-  text-shadow:
-    0 0 8px rgba(255, 191, 0, 0.8),
-    0 0 15px rgba(255, 191, 0, 0.4);
+  text-shadow: var(--glow-amber);
   color: #fff;
 }
 
-/* Fluid Typography System - ADJUSTED FOR MOBILE */
+/* --- 3. Fluid Typography System --- */
 h1,
 h2,
 h3 {
   text-transform: uppercase;
   letter-spacing: 4px;
-  font-weight: 900;
+  font-weight: var(--weight-black);
   line-height: 1.1;
   word-wrap: break-word;
-  overflow-wrap: anywhere; /* Prevents words from hanging out of containers */
+  overflow-wrap: anywhere;
 }
 
 h1 {
-  /* Lowered minimum to 1.5rem for smaller phones */
-  font-size: clamp(1.5rem, 8vw, 8rem);
+  font-size: var(--fs-h1);
 }
-
 h2 {
-  /* Lowered minimum to 1.2rem */
-  font-size: clamp(1.2rem, 6vw, 4rem);
+  font-size: var(--fs-h2);
 }
-
 h3 {
-  /* Lowered minimum to 1rem to prevent clipping on narrow screens */
-  font-size: clamp(1rem, 4vw, 2.5rem);
+  font-size: var(--fs-h3);
 }
 
-/* App Tile Base Styling */
-.app-tile {
-  position: relative;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--border-color);
-  transition: var(--transition-main);
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: var(--border-radius);
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-}
-
-.app-tile:hover {
-  transform: translateY(-5px) scale(1.02);
-  filter: brightness(1.2);
-  z-index: 10;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.tile-label {
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  /* Forcing a smaller default for mobile grid */
-  font-size: clamp(0.8rem, 3vw, 1.5rem);
-}
-
-.tile-sublabel {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
-  margin-top: 8px;
-}
-
-/* Unique Color Variations (Keeping these the same) */
-.tile-messenger {
-  background: linear-gradient(135deg, rgba(45, 0, 75, 0.6), rgba(20, 0, 40, 0.9));
-  border: 3px solid #8a2be2;
-}
-.tile-messenger .tile-label {
-  color: #d8b4fe;
-}
-.tile-email {
-  background: linear-gradient(45deg, rgba(0, 30, 10, 0.7), rgba(0, 0, 0, 0.9));
-  border: 2px solid var(--neon-green);
-}
-.tile-email .tile-label {
-  color: #4ade80;
-}
-.tile-games {
-  background: linear-gradient(135deg, rgba(60, 30, 0, 0.7), rgba(20, 0, 0, 0.9));
-  border: 2px dashed #f59e0b;
-}
-.tile-games .tile-label {
-  color: #fbbf24;
-}
-.tile-pets {
-  background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, transparent 70%);
-  border: 1px solid #0ff;
-}
-.tile-pets .tile-label {
-  color: #0ff;
-}
-.tile-inventory {
-  background: #1a1a1a;
-  border: 4px double var(--metal-steel);
-}
-.tile-inventory .tile-label {
-  color: #fff;
-  text-shadow: 0 0 5px #fff;
-}
-.tile-database {
-  background: rgba(60, 0, 0, 0.4);
-  border: 1px solid #ff0000;
-}
-.tile-database .tile-label {
-  color: #f87171;
-}
-
-/* Grid Logic */
+/* --- 4. Hub Layout Grid (The Skeleton) --- */
 .hub-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 var(--space-md);
 }
 
 .app-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Mobile first */
-  gap: 1.5rem;
+  gap: var(--space-lg);
 }
 
 @media (min-width: 768px) {
@@ -206,25 +98,25 @@ h3 {
   }
 }
 
-/* Branding & Animations */
+/* --- 5. Branding & Animations --- */
 .hub-header {
   text-align: center;
-  margin-bottom: 4rem;
-  padding-top: 3rem;
+  margin-bottom: var(--space-xxl);
+  padding-top: var(--space-huge);
 }
 
 .hub-header h1 {
-  font-size: clamp(2.5rem, 15vw, 8rem); /* Sized for mobile header */
+  font-size: clamp(2.5rem, 15vw, 8rem);
   letter-spacing: -2px;
   filter: drop-shadow(0 0 15px var(--glow-green));
 }
 
 .hub-footer {
-  margin-top: 6rem;
+  margin-top: var(--space-huge);
   text-align: center;
   font-family: var(--font-mono, monospace);
   color: var(--text-secondary);
-  padding-bottom: 2rem;
+  padding-bottom: var(--space-lg);
 }
 
 @keyframes flicker {
