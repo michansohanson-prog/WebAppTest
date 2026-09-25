@@ -26,10 +26,10 @@
 | Component                | Technology              | Role                                                                                         |
 | :----------------------- | :---------------------- | :------------------------------------------------------------------------------------------- |
 | **Build Tool**           | Vite                    | Fast development server and bundling.                                                        |
-| **Frontend Framework**   | Vue 3 (Composition API) | UI components and reactive logic.                                                            | \   |
-| **Styling**              | Vanilla CSS             | Traditional, clean styling with a focus on responsive design and mobile-first media queries. | \   |
-| **State Management**     | Pinia                   | Handling global "World State" across the app.                                                | \   |
-| **Backend-as-a-Service** | Supabase                | Handles Auth, Database (PostgreSQL), Realtime Sync, and Storage.                             | \   |
+| **Frontend Framework**   | Vue 3 (Composition API) | UI components and reactive logic.                                                            |
+| **Styling**              | Vanilla CSS             | Traditional, clean styling with a focus on responsive design and mobile-first media queries. |
+| **State Management**     | Pinia                   | Handling global "World State" across the app.                                                |
+| **Backend-as-a-Service** | Supabase                | Handles Auth, Database (PostgreSQL), Realtime Sync, and Storage.                             |
 
 ## 🚀 Development Strategy
 
@@ -45,15 +45,15 @@ _Goal: A fully navigable web app that works perfectly using "fake" data._
 - [x] View Layouts Created (Dashboard, Gallery, Login)
 - [x] **Design System Foundation:** Established "Iridescent Void" theme in `variables.css` and archetypes in `main.css`.
 - [x] **Launcher Hub UI:** Built a mobile-optimized 2x3 grid of uniform app tiles in `App.vue` with unique visual styles for each app type.
+- [x] **Navigation & Routing:** Connected all views to the router; established root path (`/`) routing and handled complex navigation logic.
 
 **⏳ Remaining Tasks:**
 
-1.  **Navigation & Routing:** Connect the new views to the router so we can move between pages from the Launcher Hub.
-2.  **UI Component Library:** Create "Smart" components in `src/components` (e.g., `CyberButton.vue`, `CyberCard.vue`).
-3.  **Design Sandbox Testing:** Use `App.vue` as a sandbox to verify layout, glow effects, and component behavior before integrating into full pages.
-4.  **World State Logic:** Create the Pinia store that reads from `src/mocks/worldState.ts`.
-5.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
-6.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
+1.  **UI Component Library:** Create "Smart" components in `src/components` (e.g., `CyberButton.vue`, `CyberCard.vue`).
+2.  **Design Sandbox Testing:** Use `App.vue` as a sandbox to verify layout, glow effects, and component behavior before integrating into full pages.
+3.  **World State Logic:** Create the Pinia store that reads from `src/mocks/worldState.ts`.
+4.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
+5.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
 
 ### Phase 2: Authentication & Storage
 
@@ -78,4 +78,4 @@ _Goal: Instant synchronization across all 6 users._
 
 ### 🚦 Current Status
 
-**Next Action Item:** Step 1 of Phase 1 — **Navigation & Routing**: Connect Launcher Hub tiles to Vue Router views.
+**Next Action Item:** UI Component Library - Create "Smart" components in `src/components` and begin testing layouts in the Design Sandbox.

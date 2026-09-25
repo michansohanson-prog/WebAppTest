@@ -1,12 +1,13 @@
 :root {
   /* --- Core Branding --- */
   --bg-color: #020308;
+  --bg-void: #020308; /* Added this missing variable */
   --surface-color: #0a0c14;
   --border-color: #2a2f3e;
   --text-primary: #ffffff;
   --text-secondary: #b0bdcf;
-  --text-mint: #d1e8d4; /* The new light green/tinted white */
-  --subtext-mint: #b8d5bc; /* Darker mint for sub-labels */
+  --text-mint: #d1e8d4;
+  --subtext-mint: #b8d5bc;
 
   /* --- Metallic Palette --- */
   --metal-steel: #7b8a94;
