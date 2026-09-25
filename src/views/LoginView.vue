@@ -2,7 +2,6 @@
   <div class="login-container">
     <div class="auth-card cyber-card">
       <header class="auth-header">
-        <!-- New multi-row layout to prevent word splitting -->
         <h1 class="glow-text flicker-text">
           <span>SYSTEM DISPLAY</span><br />
           <span>ACCESS</span>
@@ -15,6 +14,7 @@
         <input
           type="text"
           id="username"
+          v-model="credentials.userId"
           placeholder="Enter identification..."
           class="cyber-input"
         />
@@ -22,10 +22,23 @@
 
       <div class="form-group">
         <label for="passcode" class="input-label">PASS_CODE</label>
-        <input type="password" id="passcode" placeholder="••••••••" class="cyber-input" />
+        <input
+          type="password"
+          id="passcode"
+          v-model="credentials.passCode"
+          placeholder="••••••••"
+          class="cyber-input"
+        />
       </div>
 
-      <button class="btn-primary cyber-button">INITIALIZE CONNECTION</button>
+      <button
+        @click="handleLogin"
+        :disabled="isAuthenticating"
+        class="btn-primary cyber-button"
+        :class="{ loading: isAuthenticating }"
+      >
+        {{ isAuthenticating ? 'ESTABLISHING CONNECTION...' : 'INITIALIZE CONNECTION' }}
+      </button>
 
       <div class="auth-footer">
         <p class="glow-purple small-text">UNAUTHORIZED ACCESS IS LOGGED & PROHIBITED.</p>
@@ -35,7 +48,39 @@
 </template>
 
 <script setup>
-// Navigation logic will be added here.
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+// State management for login
+const isAuthenticating = ref(false)
+const credentials = reactive({
+  userId: '',
+  passCode: '',
+})
+
+const handleLogin = async () => {
+  // Basic Validation
+  if (!credentials.userId || !credentials.passCode) {
+    alert('ERROR: CREDENTIALS_REQUIRED')
+    return
+  }
+
+  isAuthenticating.value = true
+
+  // Simulate "Cyberpunk" Auth Delay (1.5 seconds)
+  await new Promise((resolve) => setTimeout(resolve, 1500))
+
+  // Mock Credentials (Change these later for Supabase integration)
+  if (credentials.userId === 'ADMIN' && credentials.passCode === '1234') {
+    console.log('AUTH_SUCCESS: ACCESS_GRANTED')
+    router.push('/hub')
+  } else {
+    alert('ERROR: INVALID_CREDENTIALS')
+    isAuthenticating.value = false
+  }
+}
 </script>
 
 <style scoped>
@@ -66,15 +111,14 @@
   margin-bottom: 40px;
 }
 
-/* Heading Styling - Optimized for the two lines */
 .glow-text {
-  font-size: clamp(1.2rem, 6vw, 3rem); /* Scaled to fit mobile and desktop */
+  font-size: clamp(1.2rem, 6vw, 3rem);
   line-height: 1.2;
   margin-bottom: 8px;
 }
 
 .glow-text span {
-  display: block; /* Ensures every word is on its own line as requested */
+  display: block;
 }
 
 .form-group {
@@ -122,9 +166,18 @@
   color: #000;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
+/* Loading State Styling */
+.btn-primary.loading {
+  background: #555;
+  opacity: 0.8;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.btn-primary:hover:not(.loading) {
   transform: scale(1.02);
 }
 </style>

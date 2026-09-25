@@ -41,17 +41,16 @@ _Goal: A fully navigable web app that works perfectly using "fake" data._
 
 - [x] Project Initialization (Vite + Vue + Pinia + Router)
 - [x] Folder Structure Scaffolding (`views`, `components`, `games`, `features`, `mocks`)
-- [x] Core Components Creation (Navbar, PetDisplay, Gamecard)
-- [x] View Layouts Created (Dashboard, Gallery, Login)
 - [x] **Design System Foundation:** Established "Iridescent Void" theme in `variables.css` and archetypes in `main.css`.
-- [x] **Launcher Hub UI:** Built a mobile-optimized 2x3 grid of uniform app tiles in `App.vue` with unique visual styles for each app type.
-- [x] **Navigation & Routing:** Connected all views to the router; established root path (`/`) routing and handled complex navigation logic.
+- [x] **Login System Implementation:** Built a functional authentication flow with dummy credentials, loading states, and navigation logic.
+- [x] **Global Shell & Navigation:** Created an `App.vue` shell that hosts all views and includes a persistent, scrollable bottom navigation bar for core sections (Hub, Comm, Messages, Games, Familiars, Inventory, Archives).
+- [x] **Core View Layouts:** Established the UI foundations for Login, Hub, and Inventory pages with mobile-optimized typography and responsive grids.
 
 **⏳ Remaining Tasks:**
 
-1.  **UI Component Library:** Create "Smart" components in `src/components` (e.g., `CyberButton.vue`, `CyberCard.vue`).
+1.  **UI Component Library:** Create "Smart" components in `src/components` (e.g., `CyberButton.vue`, `CyberCard.vue`) to ensure consistency across all sub-pages.
 2.  **Design Sandbox Testing:** Use `App.vue` as a sandbox to verify layout, glow effects, and component behavior before integrating into full pages.
-3.  **World State Logic:** Create the Pinia store that reads from `src/mocks/worldState.ts`.
+3.  **World State Logic:** Create the Pinia store that reads from `src/mocks/worldState.js`.
 4.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
 5.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
 
