@@ -1,23 +1,25 @@
 :root {
-  /* --- The Void (Deepened for high-tech contrast) --- */
+  /* --- Core Branding --- */
   --bg-color: #020308;
   --surface-color: #0a0c14;
-  --border-color: #1f2231;
-  --text-primary: #eef2ff; /* Frost white */
-  --text-secondary: #b0bdcf; /* Brightened for readability */
+  --border-color: #2a2f3e;
+  --text-primary: #ffffff;
+  --text-secondary: #b0bdcf;
+  --text-mint: #d1e8d4; /* The new light green/tinted white */
+  --subtext-mint: #b8d5bc; /* Darker mint for sub-labels */
 
-  /* --- Metallic Palette (Weathered / Darker Silver) --- */
-  --metal-steel: #7b8a94; /* Weathered silver */
-  --metal-gunmetal: #3d4652; /* Deep industrial gray */
-  --metal-shine: #bdc3c7; /* Bright silver for visibility */
+  /* --- Metallic Palette --- */
+  --metal-steel: #7b8a94;
+  --metal-gunmetal: #3d4652;
+  --metal-shine: #bdc3c7;
 
-  /* --- Neon Palette (Green, Blue, Purple Vibe) --- */
-  --neon-blue: #00f3ff; /* Electric Cyan */
-  --neon-green: #39ff14; /* Matrix Acid Green */
-  --ghost-purple: #bf00ff; /* Deep Cyber Purple (Accent) */
-  --acid-yellow: #fbff00; /* New variant for hardware */
+  /* --- Neon Palette --- */
+  --neon-blue: #00f3ff;
+  --neon-green: #39ff14;
+  --ghost-purple: #bf00ff;
+  --acid-yellow: #fbff00;
 
-  /* --- Complex Gradients & Textures --- */
+  /* --- Gradients --- */
   --gradient-murky: radial-gradient(circle at center, #1a1e32 0%, #0a0c14 50%, #020308 100%);
   --gradient-iridescent: linear-gradient(
     45deg,
@@ -32,13 +34,15 @@
     rgba(57, 255, 20, 0.08) 100%
   );
 
-  /* --- High-Intensity Glows --- */
+  /* --- Glows --- */
   --glow-blue: 0 0 8px rgba(0, 243, 255, 0.4), 0 0 16px rgba(0, 243, 255, 0.1);
   --glow-green: 0 0 8px rgba(57, 255, 20, 0.4), 0 0 16px rgba(57, 255, 20, 0.1);
   --glow-purple: 0 0 8px rgba(191, 0, 255, 0.4), 0 0 16px rgba(191, 0, 255, 0.1);
+  --glow-red: 0 0 8px rgba(255, 0, 0, 0.4), 0 0 16px rgba(255, 0, 0, 0.1);
+  --glow-amber: 0 0 8px rgba(255, 191, 0, 0.4), 0 0 16px rgba(255, 191, 0, 0.1);
 
-  /* --- Motion & Interaction --- */
+  /* --- Motion & Scale --- */
   --transition-main: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --active-scale: scale(0.98);
-  --border-radius: 2px;
+  --active-scale: scale(0.96);
+  --border-radius: 8px;
 }

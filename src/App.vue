@@ -1,82 +1,55 @@
 <template>
   <div class="app-wrapper">
-    <header class="hero">
-      <h1 class="text-neon pulse-active">NEURAL_LINK // CORE</h1>
-      <p class="subtitle">
-        System Status: <span class="status-pulse">ACTIVE</span> | Connection:
-        <span class="status-pulse">SECURE</span>
-      </p>
+    <!-- BRANDING HEADER -->
+    <header class="hub-header">
+      <h1 class="glow-green flicker-text">CORE_OS</h1>
+      <p class="subtitle glow-cyan">USER_ID: ALPHA_09 // SESSION_STATE: ACTIVE</p>
     </header>
 
-    <main class="content">
-      <section class="grid-container">
-        <!-- Card Type A -->
-        <div class="card-void">
-          <h2 class="glow-purple">Void_Module</h2>
-          <p>
-            The "Murky" gradient creates a sense of hollow depth. It feels like an empty chamber in
-            the system architecture.
-          </p>
-          <small class="data-field">ID: 0x4F32_VOID</small><br /><br />
-          <button class="btn-cyber btn-secondary">Access Logs</button>
-        </div>
+    <!-- MAIN INTERFACE HUB -->
+    <main class="hub-container">
+      <div class="app-grid">
+        <button class="app-tile tile-messenger">
+          <div class="tile-label glow-purple">COMM</div>
+          <small class="tile-sublabel">Neural Messaging</small>
+        </button>
 
-        <!-- Card Type B (Multi-Option Hardware Unit) -->
-        <!-- Swap 'hw-green' for 'hw-blue' or 'hw-purple' to change the primary accent color! -->
-        <div class="card-dark-steel hw-green">
-          <h2 class="glow-green">Hardware_Unit</h2>
-          <p>
-            A dark steel aesthetic. It blends the void with metallic textures and a faint green
-            trace of light.
-          </p>
-          <small class="data-field">MODEL: STEEL_7_MARK_II</small><br /><br />
-          <button
-            class="btn-cyber btn-secondary"
-            style="border-color: var(--neon-green); color: var(--neon-green)"
-          >
-            Override
-          </button>
-        </div>
+        <button class="app-tile tile-email">
+          <div class="tile-label glow-green">MESSAGES</div>
+          <small class="tile-sublabel">Incoming Packets</small>
+        </button>
 
-        <!-- Card Type C -->
-        <div class="card-iridescent">
-          <h2 class="glow-blue">Iridescent_Core</h2>
-          <p>
-            A "muted" colorful finish. It captures the light of the neon spectrum without being
-            overbearing.
-          </p>
-          <small class="data-field">PROC: IRIS_CORE_V4</small><br /><br />
-          <button class="btn-cyber btn-primary">Initialize</button>
-        </div>
-      </section>
+        <button class="app-tile tile-games">
+          <div class="tile-label glow-amber">GAMES</div>
+          <small class="tile-sublabel">Simulated Realities</small>
+        </button>
 
-      <section class="grid-container">
-        <div class="card-void full-width">
-          <h2 class="glow-blue">Command_Console</h2>
-          <p>Test the "Snappy" active states on mobile. Tap buttons to trigger feedback:</p>
-          <div class="button-group">
-            <button class="btn-cyber btn-primary">Main Dashboard</button>
-            <button class="btn-cyber btn-primary">Game Gallery</button>
-            <button class="btn-cyber btn-secondary">Messenger_Link</button>
-            <button
-              class="btn-cyber btn-secondary"
-              style="color: var(--neon-green); border-color: var(--neon-green)"
-            >
-              Emergency_Sync
-            </button>
-          </div>
-        </div>
-      </section>
+        <button class="app-tile tile-pets">
+          <div class="tile-label glow-cyan">FAMILIARS</div>
+          <small class="tile-sublabel">Synthetic Lifeforms</small>
+        </button>
+
+        <button class="app-tile tile-inventory">
+          <div class="tile-label">INVENTORY</div>
+          <small class="tile-sublabel">Hardware Inventory</small>
+        </button>
+
+        <button class="app-tile tile-database">
+          <div class="tile-label glow-red">ARCHIVES</div>
+          <small class="tile-sublabel">Maps and Wiki</small>
+        </button>
+      </div>
     </main>
 
-    <footer class="footer">
-      <p>SYSTEM_VERSION v1.0.4 // ARCHITECTURE: WEB_APP_TEST</p>
+    <!-- SYSTEM FOOTER -->
+    <footer class="hub-footer">
+      <p class="glow-purple">v1.0.6 // NEURAL_LINK_HUB // ENCRYPTED_CONNECTION_ESTABLISHED</p>
     </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-const systemOnline = true
+// Logic for system state can be integrated here as we progress with Pinia integration
 </script>
 
 <style scoped>
@@ -84,85 +57,32 @@ const systemOnline = true
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 3rem 1rem;
+  background-color: var(--bg-color);
 }
 
-.hero {
+.hub-header {
   text-align: center;
-  margin-bottom: 4rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1rem 3rem 1rem;
+}
+
+.hub-header h1 {
+  font-size: clamp(3rem, 15vw, 8rem);
+  margin-bottom: 0.5rem;
 }
 
 .subtitle {
-  color: var(--text-secondary);
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
   letter-spacing: 2px;
-}
-
-.content {
-  width: 100%;
-  max-width: 1100px;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2.5rem;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.full-width {
-  grid-column: 1 / -1;
-}
-
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
-  margin-top: 2rem;
-}
-
-@keyframes neonPulse {
-  0% {
-    filter: drop-shadow(0 0 5px var(--neon-blue));
-  }
-  50% {
-    filter: drop-shadow(0 0 20px var(--neon-blue));
-  }
-  100% {
-    filter: drop-shadow(0 0 5px var(--neon-blue));
-  }
-}
-
-.pulse-active {
-  animation: neonPulse 3s infinite ease-in-out;
-}
-
-@keyframes pulse-opacity {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.status-pulse {
-  color: var(--neon-green);
-  animation: pulse-opacity 2s infinite;
-}
-
-.footer {
-  margin-top: auto;
-  padding: 2rem;
-  color: var(--text-secondary);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+}
+
+.hub-container {
+  flex: 1;
+}
+
+.app-grid {
+  padding-bottom: 4rem;
 }
 </style>
