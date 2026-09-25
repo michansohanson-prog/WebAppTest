@@ -1,45 +1,69 @@
 <template>
-  <div class="app-wrapper">
-    <!-- Main Content Area -->
-    <!-- The scrollable-content class handles the bottom padding so
-         items aren't hidden by the navigation bar. -->
-    <main class="scrollable-content">
-      <router-view />
+  <div id="app">
+    <!-- Hub Header Section -->
+    <header class="hub-header">
+      <h1 class="glow-green flicker-text">Command Center</h1>
+      <p class="subtitle">System Initialization Complete</p>
+    </header>
+
+    <!-- Main Container -->
+    <main class="hub-container">
+      <section class="app-grid">
+        <CyberTile type="messenger" title="Messenger" subtitle="Encrypted Comms" />
+
+        <CyberTile type="email" title="Mailbox" subtitle="Priority Inbound" />
+
+        <CyberTile type="games" title="Arcade" subtitle="Training Simulators" />
+
+        <CyberTile type="pets" title="Biotech" subtitle="Pet Care Units" />
+
+        <CyberTile type="inventory" title="Storage" subtitle="Hardware Assets" />
+
+        <CyberTile type="database" title="Database" subtitle="Core Records" />
+      </section>
     </main>
 
-    <!-- Navigation Bar: Only visible on pages other than Login -->
-    <GlobalNav v-if="$route.path !== '/login'" />
+    <!-- Hub Footer Section -->
+    <footer class="hub-footer">
+      <p>&copy; 2026 Neural Network Interface | System v4.0.2</p>
+      <div class="glow-purple" style="font-size: 0.8rem">STATUS: ONLINE</div>
+    </footer>
+
+    <!-- Typography & General Content Examples (Hidden or bottom) -->
+    <section
+      style="
+        margin-top: 100px;
+        padding: 20px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
+      <h2>General Documentation</h2>
+      <h3>Section One</h3>
+      <p>
+        This is a standard paragraph demonstrating the subtext-mint color and line height defined in
+        your main.css file.
+      </p>
+
+      <h3 class="glow-amber">Interactive Example</h3>
+      <p>
+        The grid system automatically adjusts from 2 columns on mobile to 3 columns on desktop
+        screens as per your media queries.
+      </p>
+    </section>
   </div>
 </template>
 
 <script setup>
-// Import the navigation component we just created
-import GlobalNav from './components/GlobalNav.vue'
+import CyberTile from './components/CyberTile.vue'
+// No logic required for the initial layout showcase
 </script>
 
-<style scoped>
-.app-wrapper {
-  min-height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  /* This background comes from your variables.css */
-  background-color: var(--bg-void);
-  overflow-x: hidden; /* Prevents horizontal scroll glitches on mobile */
-}
-
-.scrollable-content {
-  flex-grow: 1;
-  width: 100%;
-  /* 90px provides enough space for the bottom bar + safe area padding */
-  padding-bottom: 90px;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-/* Ensure the router view expands to fill its container */
-:deep(router-view) {
-  display: block !important;
-  width: 100%;
-}
+<style>
+/*
+   In a standard Vue project, you would usually import these via <style> tags:
+   @import './assets/styles/variables.css';
+   @import './assets/styles/main.css';
+*/
 </style>

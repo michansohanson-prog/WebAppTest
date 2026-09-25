@@ -49,11 +49,26 @@ _Goal: A fully navigable web app that works perfectly using "fake" data._
 
 **⏳ Remaining Tasks:**
 
-1.  **UI Component Library:** Create "Smart" components in `src/components` (e.g., `CyberButton.vue`, `CyberCard.vue`) to ensure consistency across all sub-pages.
+**⏳ Remaining Tasks:**
+
+1.  **UI Component Library (Smart Components):**
+    - Create `CyberButton.vue`: A prop-driven button supporting sizes (`sm`, `md`, `lg`), variants, loading states, and a slot system for mixed content (Icons + Text). Integrate an optional `sound` prop.
+    - Create `CyberTile.vue`: A hub navigation component that handles dynamic background images, automatic dark overlays, and primary/secondary labels.
+    - Create `InventoryItem.vue`: A horizontal list-item component designed for selection. Features a long rectangular "box" layout to hold text descriptions, support for toggleable highlight states (selection on click), and slot support for item icons or quantities.
 2.  **Design Sandbox Testing:** Use `App.vue` as a sandbox to verify layout, glow effects, and component behavior before integrating into full pages.
-3.  **World State Logic:** Create the Pinia store that reads from `src/mocks/worldState.js`.
-4.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
-5.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
+    - Build Composite Components for specific pages.
+3.  **World State Logic (Engine Setup):** Create the Pinia store that reads from `src/mocks/worldState.js`. This must be structured as a **Progress Engine** to handle milestone flags and unlocks.
+4.  **AudioManager Implementation:** Build a centralized Audio Manager service to manage global volume, mute toggles, asset preloading, and concurrency for all sound triggers.
+5.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
+6.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
+
+### 🔐 Progression & Gatekeeping Architecture (New)
+
+_Goal: Ensure long-term narrative consistency and prevent unauthorized "skipping" of content._
+
+1.  **Unified Progress Store:** All user progress (Story Chapters, Pet Growth, Game Levels) will be stored as a flat "Flag" system in the database.
+2.  **Gatekeeper Middleware:** A centralized utility to check flags before rendering components or allowing navigation (e.g., `canAccess('chapter_2')`).
+3.  **Authoritative Unlocks:** Use Supabase Row-Level Security (RLS) to ensure that even if a user navigates to a "locked" URL, the database refuses to serve any data unless the required milestones are met.
 
 ### Phase 2: Authentication & Storage
 
