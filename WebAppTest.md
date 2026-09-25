@@ -45,6 +45,7 @@ _Goal: A fully navigable web app that works perfectly using "fake" data._
 - [x] **Login System Implementation:** Built a functional authentication flow with dummy credentials, loading states, and navigation logic.
 - [x] **Global Shell & Navigation:** Created an `App.vue` shell that hosts all views and includes a persistent, scrollable bottom navigation bar for core sections (Hub, Comm, Messages, Games, Familiars, Inventory, Archives).
 - [x] **Core View Layouts:** Established the UI foundations for Login, Hub, and Inventory pages with mobile-optimized typography and responsive grids.
+- [x] **Deployment & Routing:** Successfully deployed to GitHub Pages; implemented Hash Routing to ensure persistent navigation across refreshed pages.
 
 **⏳ Remaining Tasks:**
 
