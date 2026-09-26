@@ -179,18 +179,6 @@ const sleepPet = () => {
   margin-top: 2px;
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-}
-
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

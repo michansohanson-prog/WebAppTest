@@ -61,25 +61,6 @@
   --border-radius: 4px; /* Sharper edges for cyberpunk aesthetic */
   --input-bg: rgba(10, 12, 18, 0.9);
   --glass-blur: blur(10px);
-
-  /* Animation Utilities */
-  @keyframes flicker {
-    0%,
-    19%,
-    21%,
-    23%,
-    25%,
-    54%,
-    56%,
-    100% {
-      opacity: 1;
-    }
-    20%,
-    24%,
-    55% {
-      opacity: 0.7;
-    }
-  }
 }
 
 /* --- UTILITY CLASSES (Global Scope) --- */
