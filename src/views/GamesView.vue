@@ -34,6 +34,9 @@
           <!-- Neural Sync Minigame (RETAINED) -->
           <NeuralSyncGame v-if="activeGame === 'neural_sync'" />
 
+          <!-- Mole Hunt Game -->
+          <MoleHuntGame v-if="activeGame === 'mole_hunt'" />
+
           <!-- Fallback for games not yet built -->
           <div v-else class="placeholder">[ MODULE: {{ activeGame }} STATUS: DISCONNECTED ]</div>
         </div>
@@ -52,8 +55,9 @@ import GlobalNav from '../components/GlobalNav.vue'
 import CyberTile from '../components/CyberTile.vue'
 import CyberButton from '../components/CyberButton.vue'
 
-// Import NeuralSyncGame only
+// Import NeuralSyncGame and MoleHuntGame
 import NeuralSyncGame from '../games/NeuralSyncGame.vue'
+import MoleHuntGame from '../games/MoleHuntGame.vue'
 
 const activeGame = ref(null)
 
@@ -69,9 +73,9 @@ const gamesList = [
     description: 'LOGIC RECONSTRUCTION',
   },
   {
-    id: 'virtual_pet',
-    title: 'VIRTUAL_PET',
-    description: 'SYNTHETIC LIFECARE',
+    id: 'mole_hunt',
+    title: 'MOLE_HUNT',
+    description: 'SURFACE BREACH OPERATION',
   },
 ]
 
