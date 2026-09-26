@@ -17,7 +17,6 @@ body {
   font-family: var(--font-main, sans-serif);
   line-height: var(--lh-base);
   overflow-x: hidden;
-  /* Core Branding Background - defines the app environment */
   background-image:
     radial-gradient(circle at 50% 50%, rgba(20, 20, 40, 0.8) 0%, transparent 100%),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
@@ -34,7 +33,6 @@ p {
 }
 
 /* --- 2. Global Glow Utilities --- */
-/* These are consumed by components to maintain consistent neon effects */
 .glow-cyan {
   text-shadow: var(--glow-cyan) !important;
   color: #fff;
@@ -48,11 +46,11 @@ p {
   color: #fff;
 }
 .glow-red {
-  text-shadow: var(--glow-red) !important; /* Fixed typo */
+  text-shadow: var(--glow-red) !important;
   color: #fff;
 }
 .glow-amber {
-  text-shadow: var(--glow-amber) !important; /* Fixed typo */
+  text-shadow: var(--glow-amber) !important;
   color: #fff;
 }
 
@@ -78,7 +76,7 @@ h3 {
 
 .app-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Mobile first */
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
 }
 
@@ -88,8 +86,11 @@ h3 {
   }
 }
 
-/* --- 5. Core Animations --- */
-/* Simplified syntax to ensure LightningCSS compatibility */
+/* --- 5. Animations --- */
+.flicker-text {
+  animation: flicker 3s infinite;
+}
+
 @keyframes flicker {
   0%,
   100% {
@@ -107,8 +108,4 @@ h3 {
   20% {
     opacity: 1;
   }
-}
-
-.flicker-text {
-  animation: flicker 3s infinite;
 }
