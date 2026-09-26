@@ -1,5 +1,8 @@
 <template>
   <div class="hub-container">
+    <!-- Navbar stays at the bottom via its own CSS, but we include it here to ensure lifecycle -->
+    <GlobalNav />
+
     <header class="hub-header">
       <h1 class="glow-green flicker-text">GAME_SYSTEMS</h1>
       <p class="subtitle glow-cyan">SELECT A DATA_NODE TO INITIALIZE SESSION</p>
@@ -28,9 +31,11 @@
         <button class="back-button" @click="activeGame = null">[ EXIT_SESSION ]</button>
 
         <div class="game-viewport">
+          <!-- Neural Sync Minigame (RETAINED) -->
           <NeuralSyncGame v-if="activeGame === 'neural_sync'" />
-          <!-- Add other games here as you build them -->
-          <div v-else class="placeholder">[ MODULE: {{ activeGame }} NOT YET DEPLOYED ]</div>
+
+          <!-- Fallback for games not yet built -->
+          <div v-else class="placeholder">[ MODULE: {{ activeGame }} STATUS: DISCONNECTED ]</div>
         </div>
       </div>
     </main>
@@ -43,12 +48,14 @@
 
 <script setup>
 import { ref } from 'vue'
+import GlobalNav from '../components/GlobalNav.vue'
 import CyberTile from '../components/CyberTile.vue'
 import CyberButton from '../components/CyberButton.vue'
+
+// Import NeuralSyncGame only
 import NeuralSyncGame from '../games/NeuralSyncGame.vue'
 
-// State Management for the Games View
-const activeGame = ref(null) // null means we are showing the menu
+const activeGame = ref(null)
 
 const gamesList = [
   {
@@ -74,6 +81,11 @@ const launchGame = (id) => {
 </script>
 
 <style scoped>
+/* Added bottom padding to prevent content from being covered by the fixed GlobalNav */
+.hub-container {
+  padding-bottom: 100px;
+}
+
 .games-content {
   width: 100%;
   padding: var(--space-xl);
@@ -102,7 +114,7 @@ const launchGame = (id) => {
 
 .game-viewport {
   width: 100%;
-  max-width: 800px; /* Ensures the game doesn't get too huge on desktop */
+  max-width: 800px;
   border: 1px solid rgba(0, 255, 255, 0.3);
   padding: var(--space-xl);
   background: rgba(0, 0, 0, 0.4);
@@ -125,7 +137,7 @@ const launchGame = (id) => {
 }
 
 .placeholder {
-  padding: var(--space-xl);
+  padding: var--space-xl;
   text-align: center;
   color: var(--text-secondary);
 }
