@@ -44,22 +44,26 @@ _Goal: A fully navigable web app that works perfectly using "fake" data._
 - [x] **Design System Foundation:** Established a comprehensive variable system in `variables.css` for colors, spacing, fluid typography, and glow effects.
 - [x] **Refactored Core Styling:** Streamlined `main.css` to act as a global foundation (Reset, Typography, Branding) rather than containing component logic.
 - [x] **Login System Implementation:** Built a functional authentication flow with dummy credentials, loading states, and navigation logic.
-- [x] **Global Shell & Navigation:** Created an `App.vue` shell that hosts all views and includes a persistent bottom navigation bar for core sections (Hub, Comm, Messages, Games, Familiers, Inventory, Archives).
-- [x] **Core View Layouts:** Established the UI foundations for Login, Hub, and Inventory pages with mobile-optimized typography and responsive grids.
-- [x] **Deployment & Routing:** Successfully deployed to GitHub Pages; implemented Hash Routing to ensure persistent navigation across refreshed pages.
+- [x] **Global Shell & Navigation:** Created an `App.vue` shell that hosts all views and includes a persistent bottom navigation bar for core sections (Hub, Comm, Messages, Games, Familiars, Inventory, Archives).
+- [x] **Comprehensive View Architecture:** Successfully built and refined the UI foundations for all primary application nodes:
+  - **LoginView**: Secure entrance with credential validation.
+  - **HubView**: Centralized dashboard for navigation.
+  - **InventoryView**: Full asset management with filtering and status badges.
+  - **MessagesView**: Multi-pane communication interface (Inbox + Content).
+  - **FamiliarsView**: Synthetic lifeform interaction system.
+  - **GamesView**: Simulation selection grid.
+  - **ArchivesView**: Resource library for maps and wiki data.
 - [x] **Smart Component Library:**
   - Created `CyberButton.vue`: A robust component supporting sizes (`sm`, `md`, `lg`), color variants with neon gradients, loading states, sound effects, and on/off toggle functionality.
   - Created `CyberTile.vue`: A flexible navigation card handling dynamic backgrounds, dark overlays, multiple text layouts, and color variants.
+  - Created `InventoryItem.vue`: A horizontal list-item component designed for selection, featuring custom slots for icons/status badges and specific layout rules for descriptive text.
 
 **⏳ Remaining Tasks:**
 
-1.  **Design Sandbox Testing (Current):** Use a dedicated gallery in `App.vue` to verify layout consistency, glow intensities, and responsive wrapping for all components before final integration into specific pages.
-2.  **Component Expansion:**
-    - Create `InventoryItem.vue`: A horizontal list-item component designed for selection. Features a long rectangular "box" layout to hold text descriptions, support for toggleable highlight states (selection on click), and slot support for item icons or quantities.
-3.  **World State Logic (Engine Setup):** Create the Pinia store that reads from `src/mocks/worldState.js`. This must be structured as a **Progress Engine** to handle milestone flags and unlocks.
-4.  **AudioManager Implementation:** Build a centralized Audio Manager service to manage global volume, mute toggles, asset preloading, and concurrency for all sound triggers.
-5.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
-6.  **Messenger UI Layout:** Build out the visual shell of the Chat Window and Message Input within the dashboard and games.
+1.  **World State Logic (Engine Setup):** Create the Pinia store that reads from `src/mocks/worldState.js`. This must be structured as a **Progress Engine** to handle milestone flags and unlocks.
+2.  **AudioManager Implementation:** Build a centralized Audio Manager service to manage global volume, mute toggles, asset preloading, and concurrency for all sound triggers.
+3.  **Mock Game Development:** Pick one game (e.g., Puzzle or Virtual Pet) and build its logic using local variables first.
+4.  **Messenger UI Layout Finalization:** Refine the real-time text input behavior and transition effects within the Chat Window.
 
 ### 🔐 Progression & Gatekeeping Architecture (New)
 
@@ -92,4 +96,4 @@ _Goal: Instant synchronization across all 6 users._
 
 ### 🚦 Current Status
 
-**Next Action Item:** Complete Design Sandbox Testing to finalize component aesthetics before integrating into functional view pages.
+**Next Action Item:** Begin World State Logic development by creating the Pinia Progress Engine to move from "static" pages to "dynamic" interaction.

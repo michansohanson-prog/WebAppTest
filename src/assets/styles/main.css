@@ -15,7 +15,7 @@ body {
   background-color: var(--bg-void);
   color: var(--text-primary);
   font-family: var(--font-main, sans-serif);
-  line-height: var(--lh-base); /* Assuming this is in your variables */
+  line-height: var(--lh-base);
   overflow-x: hidden;
   /* Core Branding Background - defines the app environment */
   background-image:
@@ -48,13 +48,13 @@ p {
   color: #fff;
 }
 .glow-red {
-  text-shadow: var--glow-red !important;
+  text-shadow: var(--glow-red) !important; /* Fixed typo */
   color: #fff;
-} /* Fixed to var(--glow-red) */
+}
 .glow-amber {
-  text-shadow: var--glow-amber !important;
+  text-shadow: var(--glow-amber) !important; /* Fixed typo */
   color: #fff;
-} /* Fixed to var(--glow-amber) */
+}
 
 /* --- 3. Fluid Typography System --- */
 h1,
@@ -89,6 +89,7 @@ h3 {
 }
 
 /* --- 5. Core Animations --- */
+/* Simplified syntax to ensure LightningCSS compatibility */
 @keyframes flicker {
   0%,
   100% {
