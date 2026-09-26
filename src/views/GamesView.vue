@@ -1,3 +1,4 @@
+I'll update `GamesView.vue` to include the Duck Run game, replacing Puzzle_Core: ```vue
 <template>
   <div class="hub-container">
     <!-- Navbar stays at the bottom via its own CSS, but we include it here to ensure lifecycle -->
@@ -37,6 +38,9 @@
           <!-- Mole Hunt Game -->
           <MoleHuntGame v-if="activeGame === 'mole_hunt'" />
 
+          <!-- Duck Run Game -->
+          <DuckRunGame v-if="activeGame === 'duck_run'" />
+
           <!-- Fallback for games not yet built -->
           <div v-else class="placeholder">[ MODULE: {{ activeGame }} STATUS: DISCONNECTED ]</div>
         </div>
@@ -55,9 +59,10 @@ import GlobalNav from '../components/GlobalNav.vue'
 import CyberTile from '../components/CyberTile.vue'
 import CyberButton from '../components/CyberButton.vue'
 
-// Import NeuralSyncGame and MoleHuntGame
+// Import NeuralSyncGame, MoleHuntGame, and DuckRunGame
 import NeuralSyncGame from '../games/NeuralSyncGame.vue'
 import MoleHuntGame from '../games/MoleHuntGame.vue'
+import DuckRunGame from '../games/DuckRun.vue'
 
 const activeGame = ref(null)
 
@@ -68,9 +73,9 @@ const gamesList = [
     description: 'DECRYPT DATA FRAGMENTS',
   },
   {
-    id: 'puzzle',
-    title: 'PUZZLE_CORE',
-    description: 'LOGIC RECONSTRUCTION',
+    id: 'duck_run',
+    title: 'DUCK_RUN',
+    description: 'POND DASH OPERATION',
   },
   {
     id: 'mole_hunt',
@@ -151,3 +156,10 @@ const launchGame = (id) => {
   opacity: 0.6;
 }
 </style>
+``` --- ## Summary of Changes: 1. **Added DuckRunGame import** - Imported the new game component 2.
+**Added game viewport** - Added `
+<DuckRunGame v-if="activeGame === 'duck_run'" />
+` in the game-viewport 3. **Replaced puzzle with duck_run** - Changed the `gamesList` from: -
+`puzzle` (PUZZLE_CORE, LOGIC RECONSTRUCTION) to: - `duck_run` (DUCK_RUN, POND DASH OPERATION) 4.
+**Kept all other games** - NeuralSync and MoleHunt remain available The Duck Run game is now
+available as the second game option in your games menu!
