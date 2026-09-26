@@ -1,180 +1,139 @@
 <template>
   <button
-    :disabled="loading || disabled"
-    type="button"
     :class="[
       'cyber-btn',
-      `btn-${size}`,
       `variant-${variant}`,
-      { 'is-loading': loading, 'is-on': isOn },
+      size === 'lg' ? 'btn-lg' : size === 'sm' ? 'btn-sm' : 'btn-md',
+      { 'is-active': isOn },
     ]"
+    :disabled="disabled"
     @click="$emit('click')"
   >
-    <!-- Loading Spinner -->
-    <span v-if="loading" class="spinner"></span>
-
-    <!-- Button Content Slot (Supports Icons + Text) -->
-    <span :class="{ 'btn-content': !loading }">
-      <slot></slot>
-    </span>
+    <slot></slot>
   </button>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 const props = defineProps({
   variant: {
     type: String,
-    default: 'blue', // green, red, blue, yellow, purple
-    validator: (v) => ['green', 'red', 'blue', 'yellow', 'purple'].includes(v),
+    default: 'cyan',
+    validator: (v) => ['cyan', 'green', 'purple', 'red', 'amber', 'blue'].includes(v),
   },
   size: {
     type: String,
-    default: 'md', // sm, md, lg
+    default: 'md',
     validator: (v) => ['sm', 'md', 'lg'].includes(v),
-  },
-  loading: {
-    type: Boolean,
-    default: false,
   },
   isOn: {
     type: Boolean,
-    default: false, // Toggle state for active/on feel
+    default: false,
   },
   disabled: {
     type: Boolean,
     default: false,
   },
-  soundEffect: {
-    type: String,
-    default: '',
-  },
 })
 
-const emit = defineEmits(['click'])
-
-const handleClick = () => {
-  if (loading || disabled) return
-
-  if (props.soundEffect) {
-    const audio = new Audio(props.soundEffect)
-    audio.play().catch((e) => console.log('Audio play blocked by browser interaction.'))
-  }
-
-  emit('click')
-}
+defineEmits(['click'])
 </script>
 
 <style scoped>
-/* Base Button Styling using Global Variables */
 .cyber-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radius);
-  font-weight: 900;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: var(--space-sm) var--space-md; /* Default md */
+  border: 2px solid var(--color-border);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: var(--border-radius);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 0 var(--space-md); /* Using new spacing variable */
-  border: 2px solid transparent;
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
-/* Height Logic from variables.css */
+.cyber-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+}
+
+/* Size Variations */
 .btn-sm {
-  height: var(--btn-height-sm);
-  font-size: 0.8rem;
+  padding: var(--space-xs) var--space-sm;
+  font-size: var(--fs-caption);
 }
 .btn-md {
-  height: var(--btn-height-md);
-  font-size: 1rem;
+  padding: var(--space-sm) var--space-lg;
+  font-size: var(--fs-body);
 }
 .btn-lg {
-  height: var(--btn-height-lg);
-  font-size: 1.2rem;
+  padding: var(--space-md) var--space-xl;
+  font-size: var(--fs-h3);
 }
 
-/* Color Variants - Deep Dark to Neon Gradients */
-/* Note: We use the brand colors from variables.css where possible */
-
+/* Variant Styles using Gradients from variables.css */
+.variant-cyan {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+}
+.variant-green {
+  border-color: var(--color-green);
+  color: var--(color-green);
+}
+.variant-purple {
+  border-color: var(--color-purple);
+  color: var(--color-purple);
+}
+.variant-red {
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+.variant-amber {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+}
 .variant-blue {
-  background: linear-gradient(135deg, #0a0e14 0%, var(--color-blue) 100%);
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+/* Glow effects on hover */
+.cyber-btn:hover.variant-cyan {
+  box-shadow: var(--glow-cyan);
+  border-color: var(--color-cyan);
+}
+.cyber-btn:hover.variant-green {
+  box-shadow: var(--glow-green);
+  border-color: var(--color-green);
+}
+.cyber-btn:hover.variant-purple {
+  box-shadow: var(--glow-purple);
+  border-color: var(--color-purple);
+}
+.cyber-btn:hover.variant-red {
+  box-shadow: var(--glow-red);
+  border-color: (var--color-red);
+}
+.cyber-btn:hover.variant-amber {
+  box-shadow: (var--glow-amber);
+  border-color: (var--color-amber);
+}
+.cyber-btn:hover.variant-blue {
+  box-shadow: var(--glow-blue);
   border-color: var(--color-blue);
 }
 
-.variant-green {
-  background: linear-gradient(135deg, #0a1208 0%, var(--color-green) 100%);
-  border-color: var(--color-green);
-}
-
-.variant-red {
-  background: linear-gradient(135deg, #1a0808 0%, var(--color-red) 100%);
-  border-color: var(--color-red);
-}
-
-.variant-yellow {
-  background: linear-gradient(135deg, #1c1405 0%, var(--color-amber) 100%);
-  border-color: var--color-amber; /* Fallback to amber as it's our yellow */
-}
-
-.variant-purple {
-  background: linear-gradient(135deg, #0d081a 0%, var(--color-purple) 100%);
-  border-color: var(--color-purple);
-}
-
-/* Toggle / On State Logic */
-.is-on {
-  box-shadow: 0 0 20px currentColor; /* Dynamically uses the variant's color */
-  border-width: 4px;
-  transform: scale(1.03);
-  filter: brightness(1.2);
-}
-
-/* Interaction States */
-.cyber-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  filter: brightness(1.3);
-}
-
-.cyber-btn:active:not(:disabled) {
-  transform: scale(0.95);
-}
-
-/* Loading and Disabled States */
-.is-loading .btn-content {
-  visibility: hidden;
-}
-
-.spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.is-active {
+  background: rgba(255, 255, 255, 0.15) !important;
 }
 
 .cyber-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   filter: grayscale(1);
-}
-
-/* Content Layout */
-.btn-content {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm); /* Using new spacing variable */
 }
 </style>

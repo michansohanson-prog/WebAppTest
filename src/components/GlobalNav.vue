@@ -60,10 +60,10 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 85px; /* Slightly taller to accommodate labels well */
-  background: rgba(10, 10, 15, 0.9);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border-glow);
+  height: 85px;
+  background: var(--surface-dark);
+  backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,16 +73,15 @@
 
 .nav-container {
   display: flex;
-  gap: 20px;
-  overflow-x: auto; /* Enables horizontal scrolling */
-  white-space: nowrap; /* Prevents buttons from wrapping to a new line */
-  padding: 0 15px;
-  scroll-snap-type: x mandatory; /* Snaps to each button when swiping */
-  scrollbar-width: none; /* Hides scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hides scrollbar for IE/Edge */
+  gap: var(--space-md);
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0 var--space-sm;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .nav-container::-webkit-scrollbar {
   display: none;
 }
@@ -91,12 +90,12 @@
   text-decoration: none;
   color: var(--text-secondary);
   font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
-  font-weight: bold;
-  padding: 10px 15px;
+  font-size: var(--fs-caption);
+  font-weight: var(--font-weight-bold);
+  padding: 10px var--space-md;
   letter-spacing: 1px;
-  transition: all 0.2s ease;
-  scroll-snap-align: center; /* Ensures button centers when snapping */
+  transition: all var(--transition-fast);
+  scroll-snap-align: center;
 }
 
 .nav-icon {
@@ -109,14 +108,14 @@
   display: block;
 }
 
-/* High Contrast Active State */
+/* Active State */
 .nav-btn.active {
-  color: var(--neon-blue);
-  text-shadow: 0 0 8px rgba(0, 243, 255, 0.8);
-  border-bottom: 2px solid var(--neon-blue);
+  color: var(--color-blue);
+  text-shadow: var(--glow-blue) !important;
+  border-bottom: 2px solid var--color-blue;
 }
 
 .nav-btn:active {
-  transform: scale(0.95); /* Visual feedback for touch */
+  transform: scale(0.95);
 }
 </style>

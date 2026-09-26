@@ -1,13 +1,13 @@
 <template>
   <div class="comm-view">
-    <!-- HEADER -->
-    <header class="comm-header">
-      <h1 class="glow-text flicker-text">COMM_LINK</h1>
+    <!-- Header Branding -->
+    <header class="hub-header">
+      <h1 class="glow-green flicker-text">COMM_LINK</h1>
       <p class="subtitle glow-purple">NEURAL_STREAM // ENCRYPTED</p>
     </header>
 
-    <!-- MESSAGES AREA -->
-    <main class="chat-container cyber-card">
+    <!-- Messaging Area -->
+    <main class="chat-container">
       <div class="message-list">
         <!-- System Message -->
         <div class="message system">
@@ -33,128 +33,127 @@
         </div>
       </div>
 
-      <!-- INPUT AREA -->
+      <!-- Input Area - Using CyberInput and CyberButton -->
       <footer class="input-area">
-        <input type="text" placeholder="Transmit message..." class="cyber-input" />
-        <button class="btn-primary cyber-button">SEND</button>
+        <CyberInput v-model="newMessage" placeholder="Transmit message..." type="text" />
+        <CyberButton variant="blue" size="md" @click="sendMessage"> SEND </CyberButton>
       </footer>
     </main>
 
-    <footer class="comm-footer">
+    <footer class="hub-footer">
       <p class="small-text glow-cyan">BUFFER: ACTIVE // LATENCY: 4ms</p>
     </footer>
+
+    <!-- Global Navigation -->
+    <GlobalNav />
   </div>
 </template>
 
 <script setup>
-// Logic for real-time messaging will be added in the Phase 3 (Real-Time & Social) phase.
+import { ref } from 'vue'
+import CyberInput from '../components/CyberInput.vue'
+import CyberButton from '../components/CyberButton.vue'
+import GlobalNav from '../components/GlobalNav.vue'
+
+const newMessage = ref('')
+
+const sendMessage = () => {
+  if (newMessage.value.trim()) {
+    console.log('Transmitting:', newMessage.value)
+    newMessage.value = '' // Clear input after "send"
+  }
+}
 </script>
 
 <style scoped>
 .comm-view {
   min-height: 100vh;
-  padding: 20px;
+  padding: var--space-md;
   background: var(--bg-void);
   display: flex;
   flex-direction: column;
 }
 
-.comm-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
+/* Container keeps the message feed contained and scrollable */
 .chat-container {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  max-height: 75vh; /* Keeps it manageable on mobile */
+  max-height: calc(100vh - var--space-huge); /* Dynamic height based on header/footer space */
   overflow: hidden;
-  border: 1px solid var(--border-glow);
-  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--color-border);
+  background: rgba(5, 5, 8, 0.9);
+  border-radius: var(--border-radius);
 }
 
 .message-list {
   flex-grow: 1;
-  padding: 20px;
+  padding: var--space-lg;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--space-md);
 }
 
+/* Message styles remain custom to handle unique alignment (left/center/right) */
 .message {
   max-width: 85%;
-  padding: 10px 15px;
+  padding: var--space-sm var--space-md;
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: var(--fs-body);
   line-height: 1.4;
 }
 
 .system {
   align-self: center;
   background: rgba(255, 255, 255, 0.03);
-  border: 1px dashed var(--border-glow);
-  color: var(--text-mint);
+  border: 1px dashed var(--color-border);
+  color: var(--text-primary);
   font-style: italic;
 }
 
 .system .system-label {
-  color: var(--glow-cyan);
-  font-weight: bold;
+  color: var--glow-cyan;
+  font-weight: var--font-weight-bold;
+  margin-right: var--space-sm;
 }
 
 .received {
   align-self: flex-start;
-  background: rgba(25, 25, 30, 0.8);
-  border-left: 2px solid var(--glow-purple);
-  color: var(--text-mint);
+  background: rgba(20, 20, 25, 0.8);
+  border-left: 3px solid var--color-purple;
+  color: var(--text-primary);
 }
 
 .sent {
   align-self: flex-end;
-  background: rgba(40, 40, 50, 0.8);
-  border-right: 2px solid var(--glow-cyan);
-  color: var(--text-mint);
+  background: rgba(35, 35, 45, 0.8);
+  border-right: 3px solid var--color-blue;
+  color: var(--text-primary);
   text-align: right;
 }
 
 .user-tag {
-  font-size: 0.75rem;
+  font-size: var--fs-caption;
   display: block;
   margin-bottom: 4px;
   opacity: 0.6;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
+  font-family: var--font-mono, monospace;
 }
 
+/* Input area styling to ensure horizontal layout */
 .input-area {
-  padding: 20px;
-  border-top: 1px solid var(--border-glow);
+  padding: var--space-md;
+  border-top: 1px solid var--color-border;
   display: flex;
-  gap: 10px;
+  gap: var--space-md;
   background: rgba(5, 5, 10, 0.9);
 }
 
-.input-area input {
+/* Style the CyberInput to take up remaining space */
+:deep(.cyber-input-container) {
   flex-grow: 1;
-}
-
-.comm-footer {
-  margin-top: 20px;
-  text-align: center;
-}
-
-/* Reusing our established cyber-input style */
-.cyber-input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glow);
-  padding: 12px;
-  color: var(--text-mint);
-  outline: none;
-}
-
-.cyber-input:focus {
-  border-color: var(--glow-cyan);
 }
 
 /* Scrollbar styling for that extra cyberpunk feel */
@@ -162,6 +161,12 @@
   width: 4px;
 }
 .message-list::-webkit-scrollbar-thumb {
-  background: var(--border-glow);
+  background: var--color-border;
+}
+
+@media (max-width: 480px) {
+  .input-area {
+    flex-direction: column; /* Stack input and button on small phones */
+  }
 }
 </style>

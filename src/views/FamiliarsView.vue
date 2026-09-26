@@ -1,12 +1,12 @@
 <template>
   <div class="familiars-view">
-    <!-- HEADER -->
-    <header class="bio-header">
-      <h1 class="glow-text flicker-text">BIO_LINK</h1>
+    <!-- Header Branding -->
+    <header class="hub-header">
+      <h1 class="glow-green flicker-text">BIO_LINK</h1>
       <p class="subtitle glow-cyan">SYNTHETIC_LIFEFORM // UNIT: X-04</p>
     </header>
 
-    <!-- MAIN PET DISPLAY -->
+    <!-- Main Pet Display -->
     <main class="pet-container">
       <div class="cyber-card pet-display-card">
         <!-- Pet Entity Placeholder -->
@@ -42,14 +42,16 @@
 
         <!-- Interaction Console -->
         <div class="interaction-console">
-          <button @click="feedPet" class="btn-action">FEED_DATA</button>
-          <button @click="playWithPet" class="btn-action">PLAY_SIM</button>
-          <button @click="sleepPet" class="btn-action sleep-btn">STASIS_MODE</button>
+          <CyberButton variant="blue" size="md" @click="feedPet"> FEED_DATA </CyberButton>
+          <CyberButton variant="green" size="md" @click="playWithPet"> PLAY_SIM </CyberButton>
+          <CyberButton variant="purple" size="md" class="sleep-btn" @click="sleepPet">
+            STASIS
+          </CyberButton>
         </div>
       </div>
 
       <!-- Activity Log -->
-      <div class="log-container cyber-card">
+      <div class="log-container">
         <h3 class="log-title">ACTIVITY_LOG</h3>
         <div class="activity-list">
           <p v-for="(msg, index) in activityLog" :key="index" class="log-entry">
@@ -59,14 +61,19 @@
       </div>
     </main>
 
-    <footer class="bio-footer">
+    <footer class="hub-footer">
       <p class="small-text glow-purple">SYNTHETIC LIFEFORM V2.4 // BIO_LINK STABLE</p>
     </footer>
+
+    <!-- Global Navigation -->
+    <GlobalNav />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import CyberButton from '../components/CyberButton.vue'
+import GlobalNav from '../components/GlobalNav.vue'
 
 // Reactive stats for the virtual pet
 const hunger = ref(80)
@@ -101,16 +108,11 @@ const sleepPet = () => {
 <style scoped>
 .familiars-view {
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: var--space-md;
   background: var(--bg-void);
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.bio-header {
-  text-align: center;
-  margin-bottom: 30px;
 }
 
 .pet-container {
@@ -118,15 +120,17 @@ const sleepPet = () => {
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--space-xl);
 }
 
+/* Card Styling using Variables */
 .pet-display-card {
-  padding: 40px;
+  padding: var--space-xl;
   text-align: center;
-  border: 1px solid var(--border-glow);
+  border: 2px solid var(--color-border);
   background: rgba(5, 5, 10, 0.8);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var--border-radius;
 }
 
 /* The "Pet" visual representation */
@@ -134,7 +138,7 @@ const sleepPet = () => {
   position: relative;
   width: 120px;
   height: 120px;
-  margin: 0 auto 30px;
+  margin: 0 auto var--space-xl;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,7 +148,7 @@ const sleepPet = () => {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 2px solid var(--glow-cyan);
+  border: 2px solid var--glow-cyan;
   border-radius: 50%;
   animation: pulse 3s infinite ease-in-out;
 }
@@ -153,7 +157,7 @@ const sleepPet = () => {
   width: 60px;
   height: 60px;
   background: var(--bg-void);
-  border: 2px solid var(--text-mint);
+  border: 2px solid var(--text-primary); /* Swapped to primary for visibility */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -163,12 +167,14 @@ const sleepPet = () => {
 
 .entity-id {
   font-size: 0.6rem;
-  color: var(--text-mint);
+  color: var(--text-primary);
+  font-family: var--font-mono, monospace;
 }
 
 .status-tag {
   font-size: 0.7rem;
-  color: var(--glow-cyan);
+  color: var--glow-cyan;
+  margin-top: 2px;
 }
 
 @keyframes pulse {
@@ -187,21 +193,22 @@ const sleepPet = () => {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-bottom: 40px;
+  gap: var--space-md;
+  margin-bottom: var--space-xl;
 }
 
 .stat-item {
   display: flex;
   flex-direction: column;
-  font-size: 0.7rem;
-  color: var(--text-mint);
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  font-family: var--font-mono, monospace;
 }
 
 .progress-bar {
   height: 8px;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--border-glow);
+  border: 1px solid var--color-border;
   margin-top: 5px;
 }
 
@@ -212,54 +219,39 @@ const sleepPet = () => {
 }
 
 .progress-fill.energy {
-  background: var(--glow-purple);
+  background: var--glow-purple;
 }
 .progress-fill.affection {
-  background: var(--glow-red);
+  background: var--glow-red;
 }
 
-/* Interaction Buttons */
+/* Interaction Console */
 .interaction-console {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: var--space-md;
 }
 
-.btn-action {
-  padding: 10px 20px;
-  background: transparent;
-  border: 1px solid var(--border-glow);
-  color: var(--text-mint);
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-
-.btn-action:hover {
-  background: var(--border-glow);
-  color: white;
-}
-
-.sleep-btn {
-  border-style: dashed;
-}
-
-/* Activity Log */
+/* Activity Log Container */
 .log-container {
-  padding: 20px;
-  max-height: 150px;
+  padding: var--space-md;
+  max-height: 200px;
   overflow-y: auto;
-  font-family: monospace;
+  background: rgba(10, 10, 15, 0.8);
+  border: 1px solid var(--color-border);
+  border-radius: var--border-radius;
 }
 
 .log-title {
-  margin-top: 0;
-  font-size: 0.8rem;
-  color: var(--glow-cyan);
-  border-bottom: 1px solid var(--border-glow);
+  margin: 0 0 var--space-sm 0;
+  font-size: var(--fs-caption);
+  color: var--glow-cyan;
+  border-bottom: 1px solid var--color-border;
   padding-bottom: 5px;
 }
 
 .activity-list {
+  font-family: var--font-mono, monospace;
   font-size: 0.75rem;
   display: flex;
   flex-direction: column;
@@ -267,21 +259,13 @@ const sleepPet = () => {
 }
 
 .log-entry {
-  color: var(--text-mint);
+  color: var(--text-secondary);
   opacity: 0.8;
 }
 
-.bio-footer {
-  margin-top: auto;
-  padding: 40px 0;
-}
-
-/* Reusing our established cyber-input style */
-.cyber-input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glow);
-  padding: 12px;
-  color: var(--text-mint);
-  outline: none;
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr; /* Stack stats on small phones */
+  }
 }
 </style>

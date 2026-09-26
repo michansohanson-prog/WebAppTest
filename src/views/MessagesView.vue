@@ -1,13 +1,13 @@
 <template>
   <div class="messages-view">
-    <!-- HEADER -->
-    <header class="data-header">
-      <h1 class="glow-text flicker-text">DATA_STREAM</h1>
+    <!-- Header Branding -->
+    <header class="hub-header">
+      <h1 class="glow-green flicker-text">DATA_STREAM</h1>
       <p class="subtitle glow-purple">INCOMING_PACKETS // ENCRYPTED_QUEUE</p>
     </header>
 
     <main class="messages-container">
-      <!-- INBOX LIST -->
+      <!-- Inbox Sidebar -->
       <aside class="inbox-sidebar cyber-card">
         <div class="list-header">
           <h2 class="list-title">INBOX</h2>
@@ -28,7 +28,7 @@
         </ul>
       </aside>
 
-      <!-- CONTENT AREA -->
+      <!-- Message Content Display -->
       <section class="content-display cyber-card">
         <div v-if="selectedIndex !== null && messages[selectedIndex]" class="message-detail">
           <h2 class="detail-subject">{{ messages[selectedIndex].subject }}</h2>
@@ -40,22 +40,33 @@
             {{ messages[selectedIndex].body }}
           </div>
           <div class="action-footer">
-            <button class="btn-primary cyber-button">ACKNOWLEDGE_PACKET</button>
-            <button class="btn-ghost cyber-button">ARCHIVE</button>
+            <!-- Integrated CyberButtons -->
+            <CyberButton variant="blue" size="md" @click="acknowledgePacket">
+              ACKNOWLEDGE_PACKET
+            </CyberButton>
+            <CyberButton variant="grey" size="md" ghost @click="archivePacket">
+              ARCHIVE
+            </CyberButton>
           </div>
         </div>
+
         <div v-else class="empty-detail">SELECT A PACKET TO DECRYPT</div>
       </section>
     </main>
 
-    <footer class="messages-footer">
+    <footer class="hub-footer">
       <p class="small-text glow-cyan">QUEUE_STATUS: ACTIVE // SIGNAL_STRENGTH: 98%</p>
     </footer>
+
+    <!-- Global Navigation -->
+    <GlobalNav />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import CyberButton from '../components/CyberButton.vue'
+import GlobalNav from '../components/GlobalNav.vue'
 
 const selectedIndex = ref(null)
 
@@ -86,49 +97,57 @@ const messages = ref([
 const unreadCount = computed(() => {
   return messages.value.filter((m) => !m.read).length
 })
+
+const acknowledgePacket = () => {
+  console.log('Acknowledging packet...')
+}
+
+const archivePacket = () => {
+  console.log('Archiving packet...')
+}
 </script>
 
 <style scoped>
 .messages-view {
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: var--space-md;
   background: var(--bg-void);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.data-header {
+.hub-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: var--space-xl;
 }
 
+/* Main layout grid using variable spacing */
 .messages-container {
   width: 100%;
   max-width: 1000px;
   display: grid;
   grid-template-columns: 350px 1fr;
-  gap: 20px;
-  height: 70vh;
+  gap: var--space-lg;
+  height: calc(100vh - var(--space-xxl));
 }
 
-/* Sidebar List */
+/* Sidebar Styling */
 .inbox-sidebar {
   overflow-y: auto;
-  padding: 20px;
-  border: 1px solid var(--border-glow);
+  padding: var--space-md;
   display: flex;
   flex-direction: column;
 }
 
 .list-header {
-  margin-bottom: 20px;
-  border-bottom: 1px solid var(--border-glow);
-  padding-bottom: 10px;
+  margin-bottom: var--space-lg;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var--space-sm;
 }
 
 .packet-count {
-  font-size: 0.7rem;
+  font-size: var--fs-caption;
   color: var(--glow-cyan);
 }
 
@@ -139,10 +158,10 @@ const unreadCount = computed(() => {
 }
 
 .message-list li {
-  padding: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: var--space-md;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .message-list li:hover {
@@ -150,22 +169,22 @@ const unreadCount = computed(() => {
 }
 
 .message-list li.active {
-  background: rgba(0, 255, 255, 0.1);
+  background: rgba(0, 243, 255, 0.08);
   border-right: 3px solid var(--glow-cyan);
 }
 
 .message-list li.unread {
-  border-left: 2px solid var(--glow-red);
+  border-left: 2px solid var--color-red;
 }
 
 .sender {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: var(--text-mint);
+  font-size: var--fs-caption;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
 }
 
 .subject {
-  font-size: 0.85rem;
+  font-size: var--fs-body;
   opacity: 0.8;
   margin-top: 4px;
 }
@@ -176,59 +195,53 @@ const unreadCount = computed(() => {
   margin-top: 5px;
 }
 
-/* Content Display */
+/* Content Display Area */
 .content-display {
-  padding: 40px;
+  padding: var--space-xl;
   overflow-y: auto;
-  border: 1px solid var(--border-glow);
+  border: 1px solid var(--color-border);
   position: relative;
 }
 
 .detail-subject {
-  font-size: 1.8rem;
-  color: var(--text-mint);
-  margin-bottom: 5px;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var--text-primary;
+  margin-bottom: var--space-sm;
 }
 
 .detail-meta {
-  font-size: 0.8rem;
+  font-size: var(--fs-caption);
   opacity: 0.6;
-  margin-bottom: 30px;
+  margin-bottom: var--space-xl;
 }
 
 .separator {
   border: 0;
-  border-top: 1px solid var(--border-glow);
-  margin-bottom: 30px;
+  border-top: 1px solid var--color-border;
+  margin-bottom: var--space-xl;
 }
 
 .detail-body {
-  font-size: 1.1rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
-  color: var(--text-mint);
+  color: var--text-primary;
   white-space: pre-wrap;
 }
 
 .action-footer {
-  margin-top: 40px;
+  margin-top: var--space-xl;
   display: flex;
-  gap: 20px;
+  gap: var(--space-md);
 }
 
-.btn-ghost {
-  background: transparent;
-  border: none;
-  color: var(--text-mint);
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.empty-state {
+.empty-detail {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.3;
+  font-size: var--fs-caption;
+  text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
@@ -237,25 +250,5 @@ const unreadCount = computed(() => {
     height: auto;
     overflow-y: visible;
   }
-  .inbox-sidebar {
-    margin-bottom: 20px;
-  }
-}
-
-/* Reusing established classes */
-.cyber-card {
-  padding: 20px;
-  border: 1px solid var(--border-glow);
-  background: rgba(10, 10, 15, 0.8);
-  backdrop-filter: blur(5px);
-}
-
-.btn-primary.cyber-button {
-  padding: 12px 24px;
-  background: var(--glow-cyan);
-  color: black;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
 }
 </style>

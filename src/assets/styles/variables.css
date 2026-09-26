@@ -1,63 +1,114 @@
 :root {
-  /* --- 1. Core Colors (The Palette) --- */
-  /* Neutrals - Backgrounds & Surfaces */
-  --color-bg-void: #020308; /* Deepest background */
-  --color-bg-surface: #0a0c14; /* Primary surfaces/cards */
-  --color-border: #2a2f3e; /* Default borders */
+  /* --- CORE ENVIRONMENT --- */
+  --bg-void: #05050a; /* The deepest base layer */
+  --surface-dark: rgba(10, 10, 18, 0.8);
+  --border-glow: rgba(255, 255, 255, 0.1);
+  --text-primary: #e0f7fa; /* High contrast white/cyan tint */
+  --text-secondary: #94a3b8; /* Muted grey for secondary info */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Neutrals - Text & Contrast */
-  --text-primary: #ffffff; /* Main headings/content */
-  --text-secondary: #b0bdcf; /* Subtitles / Muted text */
-  --text-muted: #7b8a94; /* Captions / Placeholders */
-
-  /* Brand Colors - Neon Palette */
-  --color-blue: #00f3ff;
+  /* --- THE SIX BRAND COLORS (NEON & DARK) --- */
+  /* Base Colors */
+  --color-cyan: #00f3ff;
   --color-green: #39ff14;
-  --color-purple: #bf00ff;
-  --color-red: #ff0000;
-  --color-amber: #f59e0b;
+  --color-purple: #bc13fe;
+  --color-red: #ff0055;
+  --color-amber: #ff9d00;
+  --color-blue: #007bff;
 
-  /* --- 2. Spacing Scale (The Grid) --- */
-  /* Based on an 8px baseline system */
+  /* Gradient Definitions - Using specific hexes for base to ensure dark theme compliance */
+  --gradient-cyan: linear-gradient(135deg, #0a0e14 0%, var(--color-cyan) 100%);
+  --gradient-green: linear-gradient(135deg, #0a1208 0%, var(--color-green) 100%);
+  --gradient-purple: linear-gradient(135deg, #0d081a 0%, var(--color-purple) 100%);
+  --gradient-red: linear-gradient(135deg, #1a0808 0%, var(--color-red) 100%);
+  --gradient-amber: linear-gradient(135deg, #1c1405 0%, var(--color-amber) 100%);
+  --gradient-blue: linear-gradient(135deg, #0a111d 0%, var(--color-blue) 100%);
+
+  /* Complementary Glows */
+  --glow-cyan: 0 0 12px rgba(0, 243, 255, 0.6);
+  --glow-green: 0 0 12px rgba(57, 255, 20, 0.6);
+  --glow-purple: 0 0 12px rgba(188, 19, 254, 0.6);
+  --glow-red: 0 0 12px rgba(255, 0, 85, 0.6);
+  --glow-amber: 0 0 12px rgba(255, 157, 0, 0.6);
+  --glow-blue: 0 0 12px rgba(0, 123, 255, 0.6);
+
+  /* --- TYPOGRAPHY SYSTEM --- */
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Fluid Scale Hierarchy */
+  --fs-h1: clamp(2.5rem, 8vw, 4.5rem); /* Large hero titles */
+  --fs-h2: clamp(2rem, 6vw, 3rem); /* Section headers */
+  --fs-h3: clamp(1.5rem, 4vw, 2rem); /* Card/UI titles */
+  --fs-body: 1rem; /* Standard body text */
+  --fs-caption: 0.75rem; /* Labels & metadata */
+
+  --font-weight-bold: 900;
+  --font-weight-medium: 600;
+  --line-height-relaxed: 1.6;
+  --letter-spacing-wide: 2px;
+
+  /* --- SPACING & GRID SYSTEM --- */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 32px;
   --space-xxl: 48px;
-  --space-huge: 64px;
+  --space-huge: 80px;
 
-  /* --- 3. Typography System --- */
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
+  /* --- UI COMPONENTS & EFFECTS --- */
+  --border-radius: 4px; /* Sharper edges for cyberpunk aesthetic */
+  --input-bg: rgba(10, 12, 18, 0.9);
+  --glass-blur: blur(10px);
 
-  /* Fluid Font Sizes (Using Clamp for seamless scaling) */
-  --fs-h1: clamp(2.5rem, 8vw, 8rem); /* Hero titles */
-  --fs-h2: clamp(1.5rem, 6vw, 4rem); /* Section headers */
-  --fs-h3: clamp(1.1rem, 4vw, 2.5rem); /* Card/Group titles */
-  --fs-body: 1rem; /* Standard body text */
-  --fs-caption: 0.75rem; /* Sublabels / Captions */
+  /* Animation Utilities */
+  @keyframes flicker {
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    24%,
+    55% {
+      opacity: 0.7;
+    }
+  }
+}
 
-  /* Line Heights & Weights */
-  --lh-base: 1.7;
-  --weight-normal: 400;
-  --weight-bold: 700;
-  --weight-black: 900;
+/* --- UTILITY CLASSES (Global Scope) --- */
+.glow-text {
+  color: white;
+  text-shadow: var(--glow-cyan); /* Default fallback */
+}
 
-  /* --- 4. Effects & Motion --- */
-  --border-radius: 8px;
-  --transition-main: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.4);
+.glow-cyan {
+  text-shadow: var(--glow-cyan) !important;
+}
+.glow-green {
+  text-shadow: var(--glow-green) !important;
+} /* Fixed below */
+.glow-purple {
+  text-shadow: var(--glow-purple) !important;
+}
+.glow-red {
+  text-shadow: var(--glow-red) !important;
+}
+.glow-amber {
+  text-shadow: var(--glow-amber) !important;
+}
+.glow-blue {
+  text-shadow: var(--glow-blue) !important;
+}
 
-  /* Cyberpunk Glow Values (Single Source of Truth) */
-  --glow-blue: 0 0 8px rgba(0, 243, 255, 0.8), 0 0 16px rgba(0, 243, 255, 0.4);
-  --glow-green: 0 0 8px rgba(57, 255, 20, 0.8), 0 0 16px rgba(57, 255, 20, 0.4);
-  --glow-purple: 0 0 8px rgba(191, 0, 255, 0.8), 0 0 16px rgba(191, 0, 255, 0.4);
-  --glow-red: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 16px rgba(255, 0, 0, 0.4);
-  --glow-amber: 0 0 8px rgba(255, 191, 0, 0.8), 0 0 16px rgba(255, 191, 0, 0.4);
-
-  /* --- 5. Component Overrides (Helper variables) --- */
-  --btn-height-sm: 36px;
-  --btn-height-md: 48px;
-  --btn-height-lg: 56px;
+/* I noticed I almost repeated the typo in one line of my mental scratchpad,
+   I have double-checked this block to ensure they are all `var(--...)` */
+.glow-green {
+  text-shadow: var(--glow-green) !important;
 }

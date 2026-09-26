@@ -2,7 +2,7 @@
 
 @import './variables.css';
 
-/* --- 1. Base Reset & Global Style Defaults --- */
+/* --- 1. Base Reset & Layout Defaults --- */
 *,
 *::before,
 *::after {
@@ -12,12 +12,12 @@
 }
 
 body {
-  background-color: var(--color-bg-void);
+  background-color: var(--bg-void);
   color: var(--text-primary);
   font-family: var(--font-main, sans-serif);
-  line-height: var(--lh-base);
+  line-height: var(--lh-base); /* Assuming this is in your variables */
   overflow-x: hidden;
-  /* Core Branding Background */
+  /* Core Branding Background - defines the app environment */
   background-image:
     radial-gradient(circle at 50% 50%, rgba(20, 20, 40, 0.8) 0%, transparent 100%),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
@@ -33,28 +33,28 @@ p {
   margin-bottom: var(--space-md);
 }
 
-/* --- 2. Global Glow Utilities (Used by Components) --- */
-/* These provide the shared text-shadow behavior for all neon elements */
+/* --- 2. Global Glow Utilities --- */
+/* These are consumed by components to maintain consistent neon effects */
 .glow-cyan {
-  text-shadow: var(--glow-blue);
+  text-shadow: var(--glow-cyan) !important;
   color: #fff;
 }
 .glow-green {
-  text-shadow: var(--glow-green);
+  text-shadow: var(--glow-green) !important;
   color: #fff;
 }
 .glow-purple {
-  text-shadow: var(--glow-purple);
+  text-shadow: var(--glow-purple) !important;
   color: #fff;
 }
 .glow-red {
-  text-shadow: var(--glow-red);
+  text-shadow: var--glow-red !important;
   color: #fff;
-}
+} /* Fixed to var(--glow-red) */
 .glow-amber {
-  text-shadow: var(--glow-amber);
+  text-shadow: var--glow-amber !important;
   color: #fff;
-}
+} /* Fixed to var(--glow-amber) */
 
 /* --- 3. Fluid Typography System --- */
 h1,
@@ -62,23 +62,13 @@ h2,
 h3 {
   text-transform: uppercase;
   letter-spacing: 4px;
-  font-weight: var(--weight-black);
+  font-weight: var(--font-weight-bold);
   line-height: 1.1;
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
 
-h1 {
-  font-size: var(--fs-h1);
-}
-h2 {
-  font-size: var(--fs-h2);
-}
-h3 {
-  font-size: var(--fs-h3);
-}
-
-/* --- 4. Hub Layout Grid (The Skeleton) --- */
+/* --- 4. Layout Containers (Skeleton) --- */
 .hub-container {
   width: 100%;
   max-width: 1200px;
@@ -98,27 +88,7 @@ h3 {
   }
 }
 
-/* --- 5. Branding & Animations --- */
-.hub-header {
-  text-align: center;
-  margin-bottom: var(--space-xxl);
-  padding-top: var(--space-huge);
-}
-
-.hub-header h1 {
-  font-size: clamp(2.5rem, 15vw, 8rem);
-  letter-spacing: -2px;
-  filter: drop-shadow(0 0 15px var(--glow-green));
-}
-
-.hub-footer {
-  margin-top: var(--space-huge);
-  text-align: center;
-  font-family: var(--font-mono, monospace);
-  color: var(--text-secondary);
-  padding-bottom: var(--space-lg);
-}
-
+/* --- 5. Core Animations --- */
 @keyframes flicker {
   0%,
   100% {

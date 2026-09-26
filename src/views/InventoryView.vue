@@ -1,13 +1,13 @@
 <template>
   <div class="inventory-view">
     <!-- HEADER -->
-    <header class="header-area">
+    <header class="hub-header">
       <h1 class="glow-text flicker-text">STORAGE_NODE</h1>
       <p class="subtitle glow-purple">SECURE_ASSET_REPOSITORY // VAULT_ACCESS</p>
     </header>
 
     <main class="inventory-container">
-      <!-- FILTER BAR - UPDATED TO SCROLLABLE TAB SYSTEM -->
+      <!-- FILTER BAR -->
       <nav class="filter-bar cyber-card">
         <div class="scroll-container">
           <button @click="currentFilter = 'all'" :class="{ active: currentFilter === 'all' }">
@@ -25,24 +25,28 @@
         </div>
       </nav>
 
-      <!-- INVENTORY GRID -->
-      <div class="grid-vault">
-        <div
+      <!-- INVENTORY LIST - Optimized for single column stack -->
+      <div class="inventory-stack">
+        <InventoryItem
           v-for="item in filteredItems"
           :key="item.id"
-          class="asset-card cyber-card"
-          :class="item.type"
+          :name="item.name"
+          :description="`SOURCE: ${item.source}`"
+          :variant="mapTypeToVariant(item.type)"
+          :quantity="item.status === 'EQUIPPED' ? 1 : null"
         >
-          <div class="asset-icon">
-            <!-- Placeholder for actual item icons -->
+          <!-- Slot for the icon/symbol -->
+          <template #icon>
             <span class="entity-symbol">{{ item.symbol }}</span>
-          </div>
-          <div class="asset-info">
-            <h3 class="asset-name">{{ item.name }}</h3>
-            <p class="asset-origin">SOURCE: {{ item.source }}</p>
-            <span class="asset-status">{{ item.status }}</span>
-          </div>
-        </div>
+          </template>
+
+          <!-- Custom slot to display status if not using quantity slot -->
+          <template #quantity>
+            <span :class="['status-badge', item.status.toLowerCase()]">
+              {{ item.status }}
+            </span>
+          </template>
+        </InventoryItem>
 
         <!-- EMPTY STATE -->
         <div v-if="filteredItems.length === 0" class="empty-state">
@@ -54,13 +58,32 @@
     <footer class="inventory-footer">
       <p class="small-text glow-cyan">ENCRYPTION: AES_256 // VAULT_STATUS: SECURE</p>
     </footer>
+
+    <!-- Global Navigation -->
+    <GlobalNav />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import InventoryItem from '../components/InventoryItem.vue'
+import GlobalNav from '../components/GlobalNav.vue'
 
 const currentFilter = ref('all')
+
+// Mapping logic to ensure items use the correct brand variants
+const mapTypeToVariant = (type) => {
+  switch (type) {
+    case 'gear':
+      return 'blue'
+    case 'data':
+      return 'purple'
+    case 'bio':
+      return 'green'
+    default:
+      return 'grey'
+  }
+}
 
 // Dummy data for the assets earned across the app
 const items = ref([
@@ -121,138 +144,108 @@ const filteredItems = computed(() => {
 </script>
 
 <style scoped>
+/* Standard layout tokens used across the project */
 .inventory-view {
   min-height: 100vh;
-  /* Increased side padding to ensure the main container never touches screen edges */
-  padding: 40px 30px;
+  padding: var--space-md;
   background: var(--bg-void);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.header-area {
+.hub-header {
   text-align: center;
-  margin-bottom: 40px;
-  width: 100%;
+  margin-bottom: var--space-xl;
 }
 
-/* Ensure the container never exceeds safe screen width */
+/* Container for the content stack */
 .inventory-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 800px; /* Slightly narrower to keep vertical items focused */
   margin: 0 auto;
 }
 
-/* FILTER BAR - FIXED FOR MOBILE SCROLLING */
+/* FILTER BAR - Reverted to standard tokens */
 .filter-bar {
   display: flex;
   justify-content: center;
-  margin-bottom: 40px;
-  padding: 12px;
-  border: 1px solid var(--border-glow);
+  margin-bottom: var(--space-xl);
+  padding: var--space-md;
+  border: 2px solid var(--color-border);
   background: rgba(10, 10, 15, 0.8);
 }
 
-/* This container makes the buttons scrollable horizontally on small screens */
+/* Scrollable container for mobile */
 .scroll-container {
   display: flex;
-  gap: 10px;
+  gap: var--space-md;
   overflow-x: auto;
   white-space: nowrap;
-  padding: 5px;
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+  padding: 4px 8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .scroll-container::-webkit-scrollbar {
   display: none;
 }
 
 .filter-bar button {
   background: transparent;
-  border: 1px solid var(--border-glow);
-  color: var(--text-mint);
-  padding: 8px 20px; /* More horizontal padding for better tap targets */
-  font-size: 0.75rem;
+  border: 1px solid var(--color-border);
+  color: var--text-primary;
+  padding: var(--space-sm) 24px;
+  font-size: var--fs-caption;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .filter-bar button.active {
-  background: var(--neon-blue);
-  color: #000 !important; /* Force high contrast */
-  border-color: var(--neon-blue);
+  background: var--color-blue;
+  color: #ffffff !important;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
 }
 
-/* Grid Layout - Adjusted for safer sizing */
-.grid-vault {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
+/* INVENTORY STACK - Single column for portrait phones */
+.inventory-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg); /* Large vertical gap between items */
   width: 100%;
 }
 
-.asset-card {
-  padding: 20px;
-  border: 1px solid var(--border-glow);
-  background: rgba(10, 10, 15, 0.8);
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
-}
-
-.asset-card:hover {
-  border-color: var(--glow-cyan);
-  transform: translateY(-4px);
-  background: rgba(20, 20, 30, 0.9);
-}
-
-.asset-icon {
-  font-size: 2rem;
-  margin-bottom: 15px;
+/* Ensure the container handles wide text within its own constraints */
+.empty-state {
   text-align: center;
+  padding: var--space-xxl;
+  opacity: 0.5;
+  color: var(--text-secondary);
 }
 
-.asset-info h3 {
-  color: var(--text-mint);
-  margin: 0 0 8px 0;
-  font-size: clamp(0.9rem, 4vw, 1.2rem);
-  letter-spacing: 1px;
-}
-
-.asset-origin {
-  font-size: 0.7rem;
-  color: var(--glow-purple);
-  margin-bottom: 10px;
-}
-
-.asset-status {
-  display: inline-block;
-  font-size: 0.65rem;
+/* Status Badge Styling */
+.status-badge {
+  font-size: 0.6rem;
   padding: 2px 8px;
-  border: 1px solid var(--glow-cyan);
+  border: 1px solid var--glow-cyan;
   color: var(--glow-cyan);
   border-radius: 4px;
+  text-transform: uppercase;
 }
 
-.empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px;
-  opacity: 0.5;
-  color: var(--text-mint);
+@media (min-width: 768px) {
+  /* We keep it in a single column for clarity as requested,
+     but you could easily switch this to grid on large monitors if needed */
+  .inventory-stack {
+    max-width: 900px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 480px) {
-  /* Extra small screen adjustments */
-  .grid-vault {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 12px;
-  }
-
   .inventory-view {
-    padding: 30px 20px; /* Tighten padding slightly for very narrow screens */
+    padding: var--space-xs;
   }
 }
 </style>
