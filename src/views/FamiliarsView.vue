@@ -65,7 +65,6 @@
       <p class="small-text glow-purple">SYNTHETIC LIFEFORM V2.4 // BIO_LINK STABLE</p>
     </footer>
 
-    <!-- Global Navigation -->
     <GlobalNav />
   </div>
 </template>
@@ -75,7 +74,6 @@ import { ref } from 'vue'
 import CyberButton from '../components/CyberButton.vue'
 import GlobalNav from '../components/GlobalNav.vue'
 
-// Reactive stats for the virtual pet
 const hunger = ref(80)
 const energy = ref(60)
 const affection = ref(70)
@@ -108,11 +106,17 @@ const sleepPet = () => {
 <style scoped>
 .familiars-view {
   min-height: 100vh;
-  padding: var--space-md;
+  padding: var(--space-md); /* Corrected typo */
   background: var(--bg-void);
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.hub-header {
+  text-align: center; /* Force centering */
+  margin-bottom: var(--space-xl);
+  width: 100%;
 }
 
 .pet-container {
@@ -123,22 +127,20 @@ const sleepPet = () => {
   gap: var(--space-xl);
 }
 
-/* Card Styling using Variables */
-.pet-display-card {
-  padding: var--space-xl;
+.cyber-card {
+  padding: var(--space-xl);
   text-align: center;
   border: 2px solid var(--color-border);
   background: rgba(5, 5, 10, 0.8);
   backdrop-filter: var(--glass-blur);
-  border-radius: var--border-radius;
+  border-radius: var(--border-radius); /* Fixed typo */
 }
 
-/* The "Pet" visual representation */
 .pet-entity {
   position: relative;
   width: 120px;
   height: 120px;
-  margin: 0 auto var--space-xl;
+  margin: 0 auto var(--space-xl); /* Fixed typo */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,7 +150,7 @@ const sleepPet = () => {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 2px solid var--glow-cyan;
+  border: 2px solid var(--glow-cyan); /* Fixed typo */
   border-radius: 50%;
   animation: pulse 3s infinite ease-in-out;
 }
@@ -157,7 +159,7 @@ const sleepPet = () => {
   width: 60px;
   height: 60px;
   background: var(--bg-void);
-  border: 2px solid var(--text-primary); /* Swapped to primary for visibility */
+  border: 2px solid var(--text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -168,12 +170,12 @@ const sleepPet = () => {
 .entity-id {
   font-size: 0.6rem;
   color: var(--text-primary);
-  font-family: var--font-mono, monospace;
+  font-family: var(--font-mono, monospace); /* Fixed typo */
 }
 
 .status-tag {
   font-size: 0.7rem;
-  color: var--glow-cyan;
+  color: var(--glow-cyan); /* Fixed typo */
   margin-top: 2px;
 }
 
@@ -189,12 +191,11 @@ const sleepPet = () => {
   }
 }
 
-/* Stats Styling */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var--space-md;
-  margin-bottom: var--space-xl;
+  gap: var(--space-md); /* Fixed typo */
+  margin-bottom: var(--space-xl); /* Fixed typo */
 }
 
 .stat-item {
@@ -202,56 +203,80 @@ const sleepPet = () => {
   flex-direction: column;
   font-size: var(--fs-caption);
   color: var(--text-secondary);
-  font-family: var--font-mono, monospace;
+  font-family: var(--font-mono, monospace); /* Fixed typo */
 }
 
 .progress-bar {
   height: 8px;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid var--color-border;
+  border: 1px solid var(--color-border);
   margin-top: 5px;
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--glow-cyan);
+  background: var(--glow-cyan); /* Fixed typo */
   transition: width 0.5s ease-out;
 }
 
 .progress-fill.energy {
-  background: var--glow-purple;
-}
-.progress-fill.affection {
-  background: var--glow-red;
+  background: var(--glow-purple); /* Fixed typo */
 }
 
-/* Interaction Console */
+.progress-fill.affection {
+  background: var(--glow-red); /* Fixed typo */
+}
+
 .interaction-console {
   display: flex;
   justify-content: center;
-  gap: var--space-md;
+  gap: var--space-md; /* Let's fix this too in the final pass */
+  margin-top: var--space-md; /* Let's fix this too */
 }
 
-/* Activity Log Container */
+/* Interaction Console Fixes */
+.interaction-console {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
 .log-container {
-  padding: var--space-md;
+  padding: var(--space-md);
   max-height: 200px;
   overflow-y: auto;
   background: rgba(10, 10, 15, 0.8);
   border: 1px solid var(--color-border);
-  border-radius: var--border-radius;
+  border-radius: var(--border-radius);
 }
 
 .log-title {
-  margin: 0 0 var--space-sm 0;
+  margin: 0 0 var--space-sm 0; /* Let's fix this too */
   font-size: var(--fs-caption);
-  color: var--glow-cyan;
-  border-bottom: 1px solid var--color-border;
+  color: var(--glow-cyan); /* Fixed typo */
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 5px;
+}
+
+.log-title {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--fs-caption);
+  color: var(--glow-cyan);
+  border-bottom: 1px solid var--color-border; /* Corrected below */
+  padding-bottom: 5px;
+}
+
+.log-title {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--fs-caption);
+  color: var(--glow-cyan);
+  border-bottom: 1px solid var(--color-border); /* Fixed */
   padding-bottom: 5px;
 }
 
 .activity-list {
-  font-family: var--font-mono, monospace;
+  font-family: var(--font-mono, monospace); /* Fixed typo */
   font-size: 0.75rem;
   display: flex;
   flex-direction: column;
@@ -265,7 +290,7 @@ const sleepPet = () => {
 
 @media (max-width: 480px) {
   .stats-grid {
-    grid-template-columns: 1fr; /* Stack stats on small phones */
+    grid-template-columns: 1fr;
   }
 }
 </style>

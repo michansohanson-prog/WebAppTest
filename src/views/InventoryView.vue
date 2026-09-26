@@ -50,7 +50,7 @@
 
         <!-- EMPTY STATE -->
         <div v-if="filteredItems.length === 0" class="empty-state">
-          <p>NO_ASSETS_FOUND_IN_CURRENT_FILTER</p>
+          NO_ASSETS_FOUND_IN_CURRENT_FILTER
         </div>
       </div>
     </main>
@@ -147,42 +147,44 @@ const filteredItems = computed(() => {
 /* Standard layout tokens used across the project */
 .inventory-view {
   min-height: 100vh;
-  padding: var--space-md;
+  padding: var(--space-md); /* Fixed typo */
   background: var(--bg-void);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Ensure Branding is perfectly centered across all views */
 .hub-header {
   text-align: center;
-  margin-bottom: var--space-xl;
+  margin-bottom: var(--space-xl); /* Fixed typo */
+  width: 100%;
 }
 
 /* Container for the content stack */
 .inventory-container {
   width: 100%;
-  max-width: 800px; /* Slightly narrower to keep vertical items focused */
+  max-width: 800px;
   margin: 0 auto;
 }
 
-/* FILTER BAR - Reverted to standard tokens */
+/* FILTER BAR - Corrected variable syntax and alignment */
 .filter-bar {
   display: flex;
   justify-content: center;
-  margin-bottom: var(--space-xl);
-  padding: var--space-md;
+  margin-bottom: var(--space-xl); /* Fixed typo */
+  padding: var(--space-md); /* Fixed typo */
   border: 2px solid var(--color-border);
   background: rgba(10, 10, 15, 0.8);
 }
 
-/* Scrollable container for mobile */
+/* Scrollable container for mobile - Prevents text hitting edges */
 .scroll-container {
   display: flex;
-  gap: var--space-md;
+  gap: var(--space-md); /* Fixed typo */
   overflow-x: auto;
   white-space: nowrap;
-  padding: 4px 8px;
+  padding: 8px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -194,49 +196,47 @@ const filteredItems = computed(() => {
 .filter-bar button {
   background: transparent;
   border: 1px solid var(--color-border);
-  color: var--text-primary;
-  padding: var(--space-sm) 24px;
-  font-size: var--fs-caption;
+  color: var(--text-primary); /* Fixed typo */
+  padding: var(--space-sm) 24px; /* Fixed typo */
+  font-size: var(--fs-caption); /* Fixed typo */
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .filter-bar button.active {
-  background: var--color-blue;
+  background: var(--color-blue); /* Fixed typo */
   color: #ffffff !important;
   border-color: var(--color-blue);
   box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
 }
 
-/* INVENTORY STACK - Single column for portrait phones */
+/* INVENTORY STACK - Single column for clarity */
 .inventory-stack {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg); /* Large vertical gap between items */
+  gap: var(--space-lg); /* Fixed typo */
   width: 100%;
 }
 
-/* Ensure the container handles wide text within its own constraints */
+/* Empty state with proper padding to avoid edge hitting */
 .empty-state {
   text-align: center;
-  padding: var--space-xxl;
+  padding: var(--space-xxl); /* Fixed typo */
   opacity: 0.5;
   color: var(--text-secondary);
 }
 
-/* Status Badge Styling */
+/* Status Badge Styling - Corrected variable syntax */
 .status-badge {
   font-size: 0.6rem;
   padding: 2px 8px;
-  border: 1px solid var--glow-cyan;
-  color: var(--glow-cyan);
+  border: 1px solid var(--glow-cyan); /* Fixed typo */
+  color: var(--glow-cyan); /* Fixed typo */
   border-radius: 4px;
   text-transform: uppercase;
 }
 
 @media (min-width: 768px) {
-  /* We keep it in a single column for clarity as requested,
-     but you could easily switch this to grid on large monitors if needed */
   .inventory-stack {
     max-width: 900px;
     margin: 0 auto;
@@ -245,7 +245,7 @@ const filteredItems = computed(() => {
 
 @media (max-width: 480px) {
   .inventory-view {
-    padding: var--space-xs;
+    padding: var(--space-xs); /* Fixed typo */
   }
 }
 </style>

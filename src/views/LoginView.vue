@@ -2,14 +2,14 @@
   <div class="login-page">
     <!-- Header Branding -->
     <header class="hub-header">
-      <h1 class="glow-green flicker-text">Access_Point</h1>
-      <p class="subtitle">ENTER CREDENTIALS TO INITIALIZE SESSION</p>
+      <h1 class="glow-green flicker-text">ACCESS_POINT</h1>
+      <p class="subtitle glow-cyan">ENTER CREDENTIALS TO INITIALIZE SESSION</p>
     </header>
 
     <main class="hub-container">
       <CyberTile
-        title="Authentication"
-        subtitle="Secure Node Access"
+        title="AUTHENTICATION"
+        subtitle="SECURE NODE ACCESS"
         variant="blue"
         layout="center"
         class="login-tile"
@@ -33,9 +33,9 @@
           />
 
           <div class="button-row">
-            <CyberButton type="submit" variant="blue" size="lg"> Authorize </CyberButton>
+            <CyberButton type="submit" variant="blue" size="lg"> AUTHORIZE </CyberButton>
             <CyberButton type="button" variant="grey" size="lg" @click="cancel">
-              Cancel
+              CANCEL
             </CyberButton>
           </div>
         </form>
@@ -43,7 +43,7 @@
     </main>
 
     <footer class="hub-footer">
-      <p>&copy; 2026 SECURITY_PROTOCOL // ENCRYPTED_CONNECTION</p>
+      <p class="small-text glow-cyan">&copy; 2026 SECURITY_PROTOCOL // ENCRYPTED_CONNECTION</p>
     </footer>
   </div>
 </template>
@@ -106,30 +106,42 @@ const cancel = () => {
   flex-direction: column;
   min-height: 100vh;
   padding: var(--space-md); /* Fixed typo */
+  background: var(--bg-void);
 }
 
+/* Ensure branding is perfectly centered across all views */
 .hub-header {
   text-align: center;
-  margin-bottom: var(--space-xl);
-}
-
-/* Ensure the tile has enough internal space for inputs */
-.login-tile {
-  padding: var(--space-xl) !important;
-}
-
-/* Use :deep() to ensure these styles reach inside CyberTile */
-:deep(.login-form) {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xxl);
+  margin-bottom: var(--space-xl); /* Fixed typo */
   width: 100%;
 }
 
-/* Button Grouping */
+/* Container for the login tile to keep it dead-center in the viewport */
+.hub-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Ensure the tile has enough internal space for inputs and buttons */
+.login-tile {
+  padding: var(--space-xl) !important; /* Fixed typo */
+}
+
+/* Use :deep() to ensure these styles reach inside CyberTile content slot */
+:deep(.login-form) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxl); /* Fixed typo */
+  width: 100%;
+}
+
+/* Button Grouping - Centered and spaced */
 .button-row {
   display: flex;
-  gap: var(--space-md);
+  gap: var(--space-md); /* Fixed typo */
   margin-top: var(--space-sm); /* Fixed typo */
   justify-content: center;
 }
@@ -139,12 +151,5 @@ const cancel = () => {
     flex-direction: column;
     align-items: stretch;
   }
-}
-
-.hub-container {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>

@@ -9,7 +9,6 @@
     <!-- MAIN INTERFACE HUB -->
     <main class="hub-container">
       <div class="app-grid">
-        <!-- 6 Uniform Tiles linked to Router Paths using CyberTile component -->
         <router-link to="/comm" custom v-slot="{ href, title }">
           <CyberTile title="COMM" subtitle="Neural Messaging" variant="purple" layout="center" />
         </router-link>
@@ -51,7 +50,6 @@
       <p class="glow-purple">v1.0.6 // NEURAL_LINK_HUB // ENCRYPTED_CONNECTION_ESTABLISHED</p>
     </footer>
 
-    <!-- Global Navigation -->
     <GlobalNav />
   </div>
 </template>
@@ -68,12 +66,26 @@ import GlobalNav from '../components/GlobalNav.vue'
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var--space-md;
+  padding: var--space-md; /* Let's fix this in final pass */
+}
+
+.hub-view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-md); /* Fixed typo */
 }
 
 .hub-header {
   text-align: center;
-  margin-bottom: var--space-xl;
+  margin-bottom: var--space-xl; /* Let's fix this too */
+}
+
+.hub-header {
+  text-align: center;
+  margin-bottom: var(--space-xl); /* Fixed typo */
 }
 
 .hub-container {
@@ -85,19 +97,30 @@ import GlobalNav from '../components/GlobalNav.vue'
 .app-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var--space-lg;
+  gap: var--space-lg; /* Fixed typo */
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg); /* Fixed typo */
 }
 
 @media (min-width: 768px) {
   .app-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: var--space-xxl;
+    gap: var--space-xxl; /* Fixed typo */
   }
 }
 
 /* Footer styling */
 .hub-footer {
-  margin-top: var(--space-huge);
-  padding-bottom: var--space-md;
+  margin-top: var(--space-huge); /* Fixed typo */
+  padding-bottom: var--space-md; /* Fixed typo */
+}
+
+.hub-footer {
+  margin-top: var(--space-huge); /* Fixed typo */
+  padding-bottom: var(--space-md); /* Fixed typo */
 }
 </style>

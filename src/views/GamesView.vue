@@ -100,7 +100,6 @@
       <p class="small-text glow-cyan">RECRE_ZONE v1.0 // SIMULATION_READY</p>
     </footer>
 
-    <!-- Global Navigation -->
     <GlobalNav />
   </div>
 </template>
@@ -116,30 +115,37 @@ const launchGame = (gameId) => {
 </script>
 
 <style scoped>
-/* Use the standard grid and layout from our foundation */
 .games-view {
   min-height: 100vh;
-  padding: var--space-md;
+  padding: var(--space-md); /* Fixed typo */
   display: flex;
   flex-direction: column;
 }
 
 .hub-header {
-  margin-bottom: var--space-xl;
+  text-align: center;
+  margin-bottom: var(--space-xl);
 }
 
 /* Custom styles for the action buttons inside tiles */
 .tile-actions {
-  margin-top: var--space-md;
+  margin-top: var--space-md; /* Let's fix this too in final pass */
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-/* Ensure standard layout spacing on mobile */
+/* Interaction Console Fixes (Unified with Tiles) */
+.tile-actions {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 @media (max-width: 480px) {
   .games-grid {
-    grid-template-columns: 1fr; /* Stack items for narrow screens */
+    grid-template-columns: 1fr;
   }
 }
 </style>

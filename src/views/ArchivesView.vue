@@ -16,7 +16,6 @@
 
       <!-- Archives Grid -->
       <div class="archive-grid">
-        <!-- Category: Navigation Data -->
         <CyberTile
           title="NAVIGATION_DATA"
           subtitle="SECTOR_01 - NORTH_RIM | DEPOT_ZONE"
@@ -24,14 +23,12 @@
           layout="left"
         />
 
-        <!-- Category: World Lore -->
         <CyberTile
           title="WORLD_LORE"
           subtitle="THE_GREAT_LINK | NEURAL_COLLAPSE"
           variant="purple"
         />
 
-        <!-- Category: Technical Specs -->
         <CyberTile
           title="TECHNICAL_SPECS"
           subtitle="PROTOCOL_OVERVIEW | ENCRYPTION"
@@ -44,7 +41,6 @@
       <p class="small-text glow-cyan">DATABASE STATUS: ONLINE // SYNCING WITH NEURAL LINK...</p>
     </footer>
 
-    <!-- Global Navigation -->
     <GlobalNav />
   </div>
 </template>
@@ -63,9 +59,16 @@ const query = ref('')
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: var(--space-md); /* Ensuring view content doesn't hit screen edges */
 }
 
-/* Search Block Layout */
+/* Center Header Explicitly */
+.hub-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  width: 100%;
+}
+
 .search-block {
   margin-bottom: var(--space-xxl);
   display: flex;
@@ -73,7 +76,6 @@ const query = ref('')
   width: 100%;
 }
 
-/* Archive Grid Configuration */
 .archive-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -81,12 +83,10 @@ const query = ref('')
   margin-bottom: var(--space-huge);
 }
 
-/* Helper to ensure tiles don't overlap headers */
 .hub-container {
-  padding: var--space-md;
+  padding: var(--space-md); /* Corrected Typo */
 }
 
-/* Small text utility for footer */
 .small-text {
   font-size: var(--fs-caption);
   letter-spacing: 2px;
@@ -94,7 +94,7 @@ const query = ref('')
 
 @media (max-width: 480px) {
   .archive-grid {
-    grid-template-columns: 1fr; /* Stack items on small phones */
+    grid-template-columns: 1fr;
   }
 }
 </style>

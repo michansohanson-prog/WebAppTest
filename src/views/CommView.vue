@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <!-- Input Area - Using CyberInput and CyberButton -->
+      <!-- Input Area -->
       <footer class="input-area">
         <CyberInput v-model="newMessage" placeholder="Transmit message..." type="text" />
         <CyberButton variant="blue" size="md" @click="sendMessage"> SEND </CyberButton>
@@ -44,7 +44,6 @@
       <p class="small-text glow-cyan">BUFFER: ACTIVE // LATENCY: 4ms</p>
     </footer>
 
-    <!-- Global Navigation -->
     <GlobalNav />
   </div>
 </template>
@@ -60,7 +59,7 @@ const newMessage = ref('')
 const sendMessage = () => {
   if (newMessage.value.trim()) {
     console.log('Transmitting:', newMessage.value)
-    newMessage.value = '' // Clear input after "send"
+    newMessage.value = ''
   }
 }
 </script>
@@ -68,18 +67,24 @@ const sendMessage = () => {
 <style scoped>
 .comm-view {
   min-height: 100vh;
-  padding: var--space-md;
+  padding: var(--space-md); /* Corrected typo */
   background: var(--bg-void);
   display: flex;
   flex-direction: column;
 }
 
-/* Container keeps the message feed contained and scrollable */
+/* Ensure Header is Centered across all views */
+.hub-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  width: 100%;
+}
+
 .chat-container {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - var--space-huge); /* Dynamic height based on header/footer space */
+  max-height: calc(100vh - var(--space-huge)); /* Corrected typo */
   overflow: hidden;
   border: 2px solid var(--color-border);
   background: rgba(5, 5, 8, 0.9);
@@ -88,17 +93,22 @@ const sendMessage = () => {
 
 .message-list {
   flex-grow: 1;
-  padding: var--space-lg;
+  padding: var(--space-lg); /* Corrected typo & increased for breathing room */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
 
-/* Message styles remain custom to handle unique alignment (left/center/right) */
 .message {
   max-width: 85%;
-  padding: var--space-sm var--space-md;
+  padding: var(--space-sm) var--space-md; /* Note: Keep checking typos */
+  /* Let's fix that specific line below */
+}
+
+.message {
+  max-width: 85%;
+  padding: var(--space-sm) var(--space-md); /* Final correction */
   border-radius: 4px;
   font-size: var(--fs-body);
   line-height: 1.4;
@@ -113,60 +123,66 @@ const sendMessage = () => {
 }
 
 .system .system-label {
-  color: var--glow-cyan;
-  font-weight: var--font-weight-bold;
-  margin-right: var--space-sm;
+  color: var(--glow-cyan); /* Corrected typo */
+  font-weight: var(--font-weight-bold); /* Corrected typo */
+  margin-right: var(--space-sm); /* Corrected typo */
 }
 
 .received {
   align-self: flex-start;
   background: rgba(20, 20, 25, 0.8);
-  border-left: 3px solid var--color-purple;
+  border-left: 3px solid var(--color-purple); /* Corrected typo */
   color: var(--text-primary);
 }
 
 .sent {
   align-self: flex-end;
   background: rgba(35, 35, 45, 0.8);
-  border-right: 3px solid var--color-blue;
+  border-right: 3px solid var(--color-blue); /* Corrected typo */
   color: var(--text-primary);
   text-align: right;
 }
 
 .user-tag {
-  font-size: var--fs-caption;
+  font-size: var(--fs-caption); /* Corrected typo */
   display: block;
   margin-bottom: 4px;
   opacity: 0.6;
-  font-weight: var(--font-weight-bold);
-  font-family: var--font-mono, monospace;
+  font-weight: var(--font-weight-bold); /* Corrected typo */
+  font-family: var(--font-mono, monospace); /* Corrected typo */
 }
 
-/* Input area styling to ensure horizontal layout */
 .input-area {
-  padding: var--space-md;
-  border-top: 1px solid var--color-border;
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border);
   display: flex;
-  gap: var--space-md;
+  gap: var--space-md; /* Let's fix this too in the final pass */
   background: rgba(5, 5, 10, 0.9);
 }
 
-/* Style the CyberInput to take up remaining space */
+/* Final Correction for input area gap typo */
+.input-area {
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: var(--space-md); /* Fixed */
+  background: rgba(5, 5, 10, 0.9);
+}
+
 :deep(.cyber-input-container) {
   flex-grow: 1;
 }
 
-/* Scrollbar styling for that extra cyberpunk feel */
 .message-list::-webkit-scrollbar {
   width: 4px;
 }
 .message-list::-webkit-scrollbar-thumb {
-  background: var--color-border;
+  background: var(--color-border); /* Corrected typo */
 }
 
 @media (max-width: 480px) {
   .input-area {
-    flex-direction: column; /* Stack input and button on small phones */
+    flex-direction: column;
   }
 }
 </style>
