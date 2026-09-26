@@ -90,22 +90,3 @@ h3 {
 .flicker-text {
   animation: flicker 3s infinite;
 }
-
-@keyframes flicker {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  5% {
-    opacity: 0.8;
-  }
-  10% {
-    opacity: 1;
-  }
-  15% {
-    opacity: 0.9;
-  }
-  20% {
-    opacity: 1;
-  }
-}
