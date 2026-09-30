@@ -1,4 +1,3 @@
-I'll update `GamesView.vue` to include the Duck Run game, replacing Puzzle_Core: ```vue
 <template>
   <div class="hub-container">
     <!-- Navbar stays at the bottom via its own CSS, but we include it here to ensure lifecycle -->
@@ -32,7 +31,7 @@ I'll update `GamesView.vue` to include the Duck Run game, replacing Puzzle_Core:
         <button class="back-button" @click="activeGame = null">[ EXIT_SESSION ]</button>
 
         <div class="game-viewport">
-          <!-- Neural Sync Minigame (RETAINED) -->
+          <!-- Neural Sync Minigame -->
           <NeuralSyncGame v-if="activeGame === 'neural_sync'" />
 
           <!-- Mole Hunt Game -->
@@ -40,6 +39,9 @@ I'll update `GamesView.vue` to include the Duck Run game, replacing Puzzle_Core:
 
           <!-- Duck Run Game -->
           <DuckRunGame v-if="activeGame === 'duck_run'" />
+
+          <!-- Neon Recall (New High-Fidelity Puzzle) -->
+          <NeonRecallGame v-if="activeGame === 'neon_recall'" />
 
           <!-- Fallback for games not yet built -->
           <div v-else class="placeholder">[ MODULE: {{ activeGame }} STATUS: DISCONNECTED ]</div>
@@ -59,10 +61,13 @@ import GlobalNav from '../components/GlobalNav.vue'
 import CyberTile from '../components/CyberTile.vue'
 import CyberButton from '../components/CyberButton.vue'
 
-// Import NeuralSyncGame, MoleHuntGame, and DuckRunGame
+// Import Core Games
 import NeuralSyncGame from '../games/NeuralSyncGame.vue'
 import MoleHuntGame from '../games/MoleHuntGame.vue'
 import DuckRunGame from '../games/DuckRun.vue'
+
+// Import the new high-fidelity puzzle game
+import NeonRecallGame from '../games/NeonRecallGame.vue'
 
 const activeGame = ref(null)
 
@@ -76,6 +81,11 @@ const gamesList = [
     id: 'duck_run',
     title: 'DUCK_RUN',
     description: 'POND DASH OPERATION',
+  },
+  {
+    id: 'neon_recall',
+    title: 'NEON_RECALL',
+    description: 'SEQUENCE MEMORY PROTOCOL',
   },
   {
     id: 'mole_hunt',
@@ -146,7 +156,7 @@ const launchGame = (id) => {
 }
 
 .placeholder {
-  padding: var--space-xl;
+  padding: var(--space-xl);
   text-align: center;
   color: var(--text-secondary);
 }
@@ -156,10 +166,3 @@ const launchGame = (id) => {
   opacity: 0.6;
 }
 </style>
-``` --- ## Summary of Changes: 1. **Added DuckRunGame import** - Imported the new game component 2.
-**Added game viewport** - Added `
-<DuckRunGame v-if="activeGame === 'duck_run'" />
-` in the game-viewport 3. **Replaced puzzle with duck_run** - Changed the `gamesList` from: -
-`puzzle` (PUZZLE_CORE, LOGIC RECONSTRUCTION) to: - `duck_run` (DUCK_RUN, POND DASH OPERATION) 4.
-**Kept all other games** - NeuralSync and MoleHunt remain available The Duck Run game is now
-available as the second game option in your games menu!
