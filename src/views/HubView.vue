@@ -9,19 +9,23 @@
     <!-- MAIN INTERFACE HUB -->
     <main class="hub-container">
       <div class="app-grid">
-        <router-link to="/comm" custom v-slot="{ href, title }">
+        <!-- 
+          We wrap the tiles in standard router-links. 
+          The 'grid-link' class ensures the <a> tag doesn't break our layout or colors.
+        -->
+        <router-link to="/comm" class="grid-link">
           <CyberTile title="COMM" subtitle="Neural Messaging" variant="purple" layout="center" />
         </router-link>
 
-        <router-link to="/messages" custom v-slot="{ href, title }">
+        <router-link to="/messages" class="grid-link">
           <CyberTile title="MESSAGES" subtitle="Incoming Packets" variant="green" layout="center" />
         </router-link>
 
-        <router-link to="/games" custom v-slot="{ href, title }">
+        <router-link to="/games" class="grid-link">
           <CyberTile title="GAMES" subtitle="Simulated Realities" variant="amber" layout="center" />
         </router-link>
 
-        <router-link to="/familiars" custom v-slot="{ href, title }">
+        <router-link to="/familiars" class="grid-link">
           <CyberTile
             title="FAMILIAR"
             subtitle="Synthetic Lifeforms"
@@ -30,7 +34,7 @@
           />
         </router-link>
 
-        <router-link to="/inventory" custom v-slot="{ href, title }">
+        <router-link to="/inventory" class="grid-link">
           <CyberTile
             title="INVENTORY"
             subtitle="Hardware Inventory"
@@ -39,7 +43,7 @@
           />
         </router-link>
 
-        <router-link to="/archives" custom v-slot="{ href, title }">
+        <router-link to="/archives" class="grid-link">
           <CyberTile title="ARCHIVES" subtitle="Maps and Wiki" variant="red" layout="center" />
         </router-link>
       </div>
@@ -66,26 +70,12 @@ import GlobalNav from '../components/GlobalNav.vue'
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var--space-md; /* Let's fix this in final pass */
-}
-
-.hub-view {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: var(--space-md); /* Fixed typo */
+  padding: var(--space-md);
 }
 
 .hub-header {
   text-align: center;
-  margin-bottom: var--space-xl; /* Let's fix this too */
-}
-
-.hub-header {
-  text-align: center;
-  margin-bottom: var(--space-xl); /* Fixed typo */
+  margin-bottom: var(--space-xl);
 }
 
 .hub-container {
@@ -93,34 +83,34 @@ import GlobalNav from '../components/GlobalNav.vue'
   max-width: 900px;
 }
 
-/* Standard mobile-first grid defined in main.css */
-.app-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var--space-lg; /* Fixed typo */
+/* 
+  This class is crucial. 
+  It makes the <a> tag (router-link) behave like a block 
+  so the whole tile area is clickable without changing text style.
+*/
+.grid-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
+/* Grid Layout */
 .app-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg); /* Fixed typo */
+  gap: var(--space-lg);
 }
 
 @media (min-width: 768px) {
   .app-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: var--space-xxl; /* Fixed typo */
+    gap: var(--space-xxl);
   }
 }
 
-/* Footer styling */
 .hub-footer {
-  margin-top: var(--space-huge); /* Fixed typo */
-  padding-bottom: var--space-md; /* Fixed typo */
-}
-
-.hub-footer {
-  margin-top: var(--space-huge); /* Fixed typo */
-  padding-bottom: var(--space-md); /* Fixed typo */
+  margin-top: var(--space-huge);
+  padding-bottom: var(--space-md);
+  text-align: center;
 }
 </style>

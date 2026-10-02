@@ -43,6 +43,9 @@
           <!-- Neon Recall (New High-Fidelity Puzzle) -->
           <NeonRecallGame v-if="activeGame === 'neon_recall'" />
 
+          <!-- Neon Circuit (The new pathfinding game) -->
+          <NeonCircuitGame v-if="activeGame === 'neon_circuit'" />
+
           <!-- Fallback for games not yet built -->
           <div v-else class="placeholder">[ MODULE: {{ activeGame }} STATUS: DISCONNECTED ]</div>
         </div>
@@ -66,8 +69,9 @@ import NeuralSyncGame from '../games/NeuralSyncGame.vue'
 import MoleHuntGame from '../games/MoleHuntGame.vue'
 import DuckRunGame from '../games/DuckRun.vue'
 
-// Import the new high-fidelity puzzle game
+// Import High-Fidelity Games
 import NeonRecallGame from '../games/NeonRecallGame.vue'
+import NeonCircuitGame from '../games/NeonCircuitGame.vue'
 
 const activeGame = ref(null)
 
@@ -91,6 +95,11 @@ const gamesList = [
     id: 'mole_hunt',
     title: 'MOLE_HUNT',
     description: 'SURFACE BREACH OPERATION',
+  },
+  {
+    id: 'neon_circuit',
+    title: 'NEON_LINK',
+    description: 'ESTABLISH DATA PATHS',
   },
 ]
 
